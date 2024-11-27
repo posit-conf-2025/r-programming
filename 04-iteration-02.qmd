@@ -37,7 +37,7 @@ For coding, we will use `r-programming-exercises`:
 
 ## Reading multiple files
 
-Using {purrr} to iterate can help you perform many tasks repeatably and reproducibly.
+Iteration functions in {purrr} can help with repeatable tasks.
 
 . . .
 
@@ -392,14 +392,13 @@ reduce(num, \(acc, x) acc + x)
 | 3       |        |      
 | 4       | **10** |   
 
-## Moar reduce
+## Init for Reduce
 
-- sometimes easier just to say `sum`, which will take two arguments
-- `.init`
+## Variants
 
-## Functional sandwiches
+## Use premade functions
 
-![[Anjana Vakil's Functional Sandwiches](https://observablehq.com/collection/@anjana/functional-javascript-first-steps)](images/anjana-vakil-functional-sanwiches.png){fig-alt="Shows ingredients of a sandwich: onions and pickles *filtered* out, remaining ingredients *mapped* to a slicer-function, then *reduced* to a sandwich" fig-align="center"}
+## Use dots
 
 ## Horrible example
 
