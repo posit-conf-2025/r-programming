@@ -205,7 +205,7 @@ Functional programming has three fundamental operations:
 
 Each of these takes a *function* as an argument, to tell the operator *what* to do.
 
-## Map {auto-animate=true}
+## Map: Intro {auto-animate=true}
 
 ```r
 num <- 1:4
@@ -219,7 +219,7 @@ map(num, \(x) x + 1)
   - list or atomic vector
   - function to apply to each member of the vector
 
-## Map {auto-animate=true}
+## Map: Intermediate result {auto-animate=true}
 
 ```r
 num <- 1:4
@@ -236,7 +236,7 @@ map(num, \(x) x + 1)
 | 4       |        |      
 
 
-## Map {auto-animate=true, auto-animate-unmatched=false}
+## Map: Result {auto-animate=true, auto-animate-unmatched=false}
 
 ```r
 num <- 1:4
@@ -278,7 +278,7 @@ map_int(num, \(x) x + 1)
 
 ::::
 
-## Filter (Keep) {auto-animate=true}
+## Keep: Intro {auto-animate=true}
 
 
 ```r
@@ -296,7 +296,7 @@ Outside {purrr}: known as `filter()`, but {dplyr} took this name first.
   - function, when applied to each member, returns `TRUE` or `FALSE`
     - this is called a *predicate* function
 
-## Filter (Keep) {auto-animate=true, auto-animate-unmatched=false}
+## Keep: Intermediate result {auto-animate=true, auto-animate-unmatched=false}
 
 ```r
 num <- 1:4
@@ -312,7 +312,7 @@ keep(num, \(x) x %% 2 == 0)
 | 3       |            |        |              
 | 4       |            |        |
 
-## Filter (Keep) {auto-animate-unmatched=false}
+## Keep: Result {auto-animate-unmatched=false}
 
 ```r
 num <- 1:4
@@ -328,7 +328,7 @@ keep(num, \(x) x %% 2 == 0)
 | 3       | **`FALSE`** |        |              
 | 4       | **`TRUE`**  | **4**  |
 
-## Reduce {auto-animate=true}
+## Reduce: Intro {auto-animate=true}
 
 ```r
 num <- 1:4
@@ -344,7 +344,7 @@ reduce(num, \(acc, x) acc + x)
     - the accumulated value
     - the "next" value of the input
     
-## Reduce {auto-animate=true}
+## Reduce: First result {auto-animate=true}
 
 ```r
 num <- 1:4
@@ -360,7 +360,7 @@ reduce(num, \(acc, x) acc + x)
 | 3       |        |      
 | 4       |        |   
 
-## Reduce {auto-animate=true, auto-animate-unmatched=false}
+## Reduce: Intermediate result {auto-animate=true, auto-animate-unmatched=false}
 
 ```r
 num <- 1:4
@@ -376,7 +376,7 @@ reduce(num, \(acc, x) acc + x)
 | 3       |        |      
 | 4       |        |   
 
-## Reduce {auto-animate=true, auto-animate-unmatched=false}
+## Reduce: Result {auto-animate=true, auto-animate-unmatched=false}
 
 ```r
 num <- 1:4
@@ -408,7 +408,7 @@ reduce(num, \(acc, x) acc + x, .init = 1)
 | 3       |        |      
 | 4       | **11** |  
 
-## Use existing functions
+## Reduce: Use existing functions
 
 ```r
 num <- 1:4
@@ -479,20 +479,7 @@ ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
   scale_color_discrete(labels = tolower) # tolower is a function
 ```
 
-## Walk
-
-When we read "for each", we might think of using `map()`:
-
--   Writing out a file is a *side effect*.
-
--   We aren't interested in the return value.
-
-. . .
-
-{purrr} has a function for that: `walk()` (and friends).
-
-
-## If we have time (2)
+## If we have time
 
 Three fundamental operations in functional programming
 
