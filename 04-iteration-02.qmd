@@ -392,23 +392,72 @@ reduce(num, \(acc, x) acc + x)
 | 3       |        |      
 | 4       | **10** |   
 
-## Init for Reduce
+## Reduce: Initialize {auto-animate=true}
 
-## Variants
+```r
+num <- 1:4
+reduce(num, \(acc, x) acc + x, .init = 1)
+```
 
-## Use premade functions
+<hr>
+
+| Input   | Result |
+|:-------:|:------:|
+| 1       |        |
+| 2       |        |        
+| 3       |        |      
+| 4       | **11** |  
+
+## Use existing functions
+
+```r
+num <- 1:4
+reduce(num, sum, .init = 1)
+```
+
+<hr>
+
+| Input   | Result |
+|:-------:|:------:|
+| 1       |        |
+| 2       |        |        
+| 3       |        |      
+| 4       | **11** |  
 
 ## Use dots
+
+## Variants and Adverbs
+
+Some useful variants, can mix and match:
+
+::: incremental
+ - `map_lgl()` , `map_int()`, `map_dbl()`, `map_chr()`
+ - `walk()`: like `map()`, but called for side-effect
+ - `imap()`, `lmap()`: use index or list-name as argument
+ - `map2()`, `pmap()`: apply over sets of inputs
+:::
+
+. . .
+
+Adverbs modify verbs (functions):
+
+::: incremental
+ - `possibly()`, `quietly()`, `slowly()`, `insistently()`, `safely()`
+ - `negate()`: return the negative of a predicate
+ - `compose()`: put two functions together
+ - `partial()`: pre-fill some arguments of a function
+:::
 
 ## Horrible example
 
 Re-imagine `list_rbind()` using functional-programming techniques:
 
 ``` r
+# TODO: check
 list_rbind2 <- function(list_df, names_to) {
   list_df |>
     purrr::keep(negate(is.null)) |>
-    purrr::imap(\(d, name) dplyr::mutate(d, "{names_to}" := name)) |>
+    purrr::lmap(\(d, name) dplyr::mutate(d, "{names_to}" := name)) |>
     purrr::reduce(rbind)
 }
 ```
