@@ -17,12 +17,13 @@ bibliography: references.bib
 
 ## Learning objectives
 
-In this session, we will discuss:
+In this session, we will discuss functional programming:
 
 ::: incremental
--   using `purrr::map()` to read a bunch of files
--   using `purrr::walk()` to write a bunch of files
--   functional programming, more generally
+- example: read a bunch of files, then put them in a single data frame
+- fundamental functions in {purrr}: 
+   - `map()`, `keep()`, and `reduce()`
+- more generally, using functions as arguments to functions 🤯
 :::
 
 . . .
@@ -36,7 +37,7 @@ For coding, we will use `r-programming-exercises`:
 
 ## Reading multiple files
 
-Using {purrr} to iterate can help you perform many tasks repeatably and reproducibly.
+Iteration functions in {purrr} can help with repeatable tasks.
 
 . . .
 
@@ -73,7 +74,7 @@ In the `programming-r-exercises` repository:
 -   open `iteration-02-01-reading-files.R`
 -   restart R
 
-## Our turn: reading data manually
+## Our turn: Reading data manually
 
 Here's our starting code:
 
@@ -94,7 +95,7 @@ What problems do you see?
 
 Run this example code, discuss with your neighbor.
 
-## Our turn: make list of paths
+## Our turn: Make list of paths
 
 I see this as a two step problem:
 
@@ -116,7 +117,7 @@ paths <-
   print()
 ```
 
-## Our turn: read data
+## Our turn: Read data
 
 Let's work together to improve this code to read data:
 
@@ -147,7 +148,7 @@ read_csv("not/a/file.csv")
 
 Function operators:
 
--   take a function
+-   take a function 
 -   return a modified function
 
 . . .
@@ -175,7 +176,7 @@ poss_read_csv("not/a/file.csv")
 poss_read_csv(I("a, b\n 1, 2"), col_types = "dd")
 ```
 
-## Our turn: handle failure
+## Our turn: Handle failure
 
 In the `programming-r-exercises` repository:
 
@@ -190,29 +191,307 @@ possibly_read_excel <- possibly() # we do the rest
 
 Use this function in your script.
 
-## If we have time
+## Fundamental operations
 
-Functional programming has three fundamental operations:
+Functional programming has three fundamental operations; they act on lists or vectors:
 
 ::: incremental
--   `filter()` - like spaghetti, not coffee: `purrr::keep()`
--   `map()` - do *this* to each element: `purrr::map()`
--   `reduce()` - combine into new thing: `purrr::reduce()`
+-   `map` - do *this* to each element: `purrr::map()`
+-   `filter` - like spaghetti, not coffee: `purrr::keep()`
+-   `reduce` - combine into new thing: `purrr::reduce()`
 :::
 
-## Functional sandwiches
+. . . 
 
-![[Anjana Vakil's Functional Sandwiches](https://observablehq.com/collection/@anjana/functional-javascript-first-steps)](images/anjana-vakil-functional-sanwiches.png){fig-alt="Shows ingredients of a sandwich: onions and pickles *filtered* out, remaining ingredients *mapped* to a slicer-function, then *reduced* to a sandwich" fig-align="center"}
+Each of these takes a *function* as an argument, to tell the operator *what* to do.
+
+## Map: Intro {auto-animate=true}
+
+```r
+num <- 1:4
+num |> map(\(x) x + 1)
+```
+
+<hr>
+
+`map()` takes:
+
+  - list or atomic vector
+  - function to apply to each member of the vector
+
+## Map: Intermediate result {auto-animate=true}
+
+```r
+num <- 1:4
+num |> map(\(x) x + 1)
+```
+
+<hr>
+
+| Input   | Result |
+|:-------:|:------:|
+| 1       | 2      |
+| 2       |        |        
+| 3       |        |      
+| 4       |        |      
+
+
+## Map: Result {auto-animate=true, auto-animate-unmatched=false}
+
+```r
+num <- 1:4
+num |> map(\(x) x + 1)
+```
+
+<hr>
+
+| Input   | Result |
+|:-------:|:------:|
+| 1       | **2**  |
+| 2       | **3**  |        
+| 3       | **4**  |      
+| 4       | **5**  |   
+
+## Map: Atomic variants
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+`map()` always returns a list:
+
+```{r}
+num <- 1:4
+num |> map(\(x) x + 1)
+```
+:::
+
+::: {.column width="50%"}
+
+Use an atomic variant to specify type:
+
+```{r}
+num <- 1:4
+num |> map_int(\(x) x + 1)
+```
+:::
+
+::::
+
+## Keep: Intro {auto-animate=true}
+
+
+```r
+num <- 1:4
+num |> keep(\(x) x %% 2 == 0)
+```
+
+<hr>
+
+Outside {purrr}: known as `filter()`, but {dplyr} took this name first. 
+
+`keep()` takes:
+
+  - list or vector
+  - function, when applied to each member, returns `TRUE` or `FALSE`
+    - this is called a *predicate* function
+
+## Keep: Intermediate result {auto-animate=true, auto-animate-unmatched=false}
+
+```r
+num <- 1:4
+num |> keep(\(x) x %% 2 == 0)
+```
+
+<hr>
+
+| Input   | Evaluation | Result |
+|:-------:|:---------- |:------:|
+| 1       | `FALSE`    |        | 
+| 2       | `TRUE`     | 2      |
+| 3       |            |        |              
+| 4       |            |        |
+
+## Keep: Result {auto-animate-unmatched=false}
+
+```r
+num <- 1:4
+num |> keep(\(x) x %% 2 == 0)
+```
+
+<hr>
+
+| Input   | Evaluation | Result |
+|:-------:|:----------- |:------:|
+| 1       | **`FALSE`** |        | 
+| 2       | **`TRUE`**  | **2**  |
+| 3       | **`FALSE`** |        |              
+| 4       | **`TRUE`**  | **4**  |
+
+## Reduce: Intro {auto-animate=true}
+
+```r
+num <- 1:4
+num |> reduce(\(acc, x) acc + x)
+```
+
+<hr>
+
+`reduce()` takes:
+
+  - a list or vector
+  - a *reducer* function, which takes two arguments:
+    - the accumulated value
+    - the "next" value of the input
+    
+## Reduce: First result {auto-animate=true}
+
+```r
+num <- 1:4
+num |> reduce(\(acc, x) acc + x)
+```
+
+<hr>
+
+| Input   | Result |
+|:-------:|:------:|
+| 1       | 1      |
+| 2       |        |        
+| 3       |        |      
+| 4       |        |   
+
+## Reduce: Intermediate result {auto-animate=true, auto-animate-unmatched=false}
+
+```r
+num <- 1:4
+num |> reduce(\(acc, x) acc + x)
+```
+
+<hr>
+
+| Input   | Result |
+|:-------:|:------:|
+| 1       |        |
+| 2       | 3      |        
+| 3       |        |      
+| 4       |        |   
+
+## Reduce: Result {auto-animate=true, auto-animate-unmatched=false}
+
+```r
+num <- 1:4
+num |> reduce(\(acc, x) acc + x)
+```
+
+<hr>
+
+| Input   | Result |
+|:-------:|:------:|
+| 1       |        |
+| 2       |        |        
+| 3       |        |      
+| 4       | **10** |   
+
+## Reduce: Initialize {auto-animate=true}
+
+```r
+num <- 1:4
+num |> reduce(\(acc, x) acc + x, .init = 1)
+```
+
+<hr>
+
+| Input   | Result |
+|:-------:|:------:|
+| 1       |        |
+| 2       |        |        
+| 3       |        |      
+| 4       | **11** |  
+
+## Reduce: Use existing functions
+
+```r
+num <- 1:4
+num |> reduce(sum, .init = 1)
+```
+
+<hr>
+
+| Input   | Result |
+|:-------:|:------:|
+| 1       |        |
+| 2       |        |        
+| 3       |        |      
+| 4       | **11** |  
+
+## Supply additional arguments
+
+```{r}
+num <- c(1, 2, 3, NA, 4)
+num |> reduce(sum)
+```
+
+. . .
+
+The default behavior for `sum()` is not to remove `NA` values.
+
+. . .
+
+<hr>
+
+To change the behavior, use an anonymous function:
+
+```{r}
+num |> reduce(\(acc, x) sum(acc, x, na.rm = TRUE))
+```
+
+. . .
+
+::: {.callout-caution title="No longer recommended"}
+
+```r
+# TODO: check that newer Quarto will fix font-size here
+num |> reduce(sum, na.rm = TRUE)
+```
+::: 
+
+Using an anonymous function will:
+
+ - make it more explicit which argument goes to which function.
+ - tend to yield better error messages.
+
+## Variants and adverbs
+
+Some useful variants, can mix and match:
+
+::: incremental
+ - `map_lgl()` , `map_int()`, `map_dbl()`, `map_chr()`
+ - `walk()`: like `map()`, but called for side-effect
+ - `imap()`, `lmap()`: use index or list-name as argument
+ - `map2()`, `pmap()`: apply over sets of inputs
+:::
+
+. . .
+
+Adverbs modify verbs (functions):
+
+::: incremental
+ - `possibly()`, `quietly()`, `slowly()`, `insistently()`, `safely()`
+ - `negate()`: return the negative of a predicate
+ - `compose()`: put two functions together
+ - `partial()`: pre-fill some arguments of a function
+:::
 
 ## Horrible example
 
-Implement `list_rbind()` using functional-programming techniques:
+Re-imagine `list_rbind()` using functional-programming techniques:
 
 ``` r
-list_rbind2 <- function(df, names_to) {
-  df |>
-    purrr::keep(\(x) !is.null(x)) |>
-    purrr::imap(\(d, name) dplyr::mutate(d, "{names_to}" := name)) |>
+# TODO: check
+list_rbind2 <- function(list_df, names_to) {
+  list_df |>
+    purrr::keep(negate(is.null)) |>
+    purrr::lmap(\(d, name) dplyr::mutate(d, "{names_to}" := name)) |>
     purrr::reduce(rbind)
 }
 ```
@@ -222,112 +501,6 @@ list_rbind2 <- function(df, names_to) {
 -   *maps* name of element to data-column, `purrr::imap()`
 -   *reduces* list to single data-frame, `purrr::reduce()`
 :::
-
-## Our turn: saving multiple outputs
-
-**Goal**: write out a csv file *for each* value of `clarity` within ggplot2's `diamonds` dataset.
-
-. . .
-
-<hr>
-
-When we read "for each", we might think of using `map()`:
-
--   Writing out a file is a *side effect*.
-
--   We aren't interested in the return value.
-
-. . .
-
-{purrr} has a function for that: `walk()` (and friends).
-
-## Our turn - starter code
-
-`iteration-02-02-writing-files.R`
-
-``` r
-# ?dplyr::group_nest(), ?stringr::str_glue()
-# from diamonds, create tibble with columns: clarity, data, filename
-by_clarity_csv <-
-  diamonds |>
-  # nest by clarity
-  # create column for filename
-  print()
-
-# ?readr::write_csv()
-# using the data and filename, write out csv files
-walk2(
-  by_clarity_csv$data,
-  by_clarity_csv$filename,
-  \(data, filename) NULL # replace with actual code
-)
-```
-
-## Our turn: writing multiple plots
-
-**Goal**: Save histogram for `carat` for each value of `clarity` within `diamonds` dataset.
-
-. . .
-
-<hr>
-
-Create a `plot` column, where each element is a ggplot. This will be a list-column.
-
-. . .
-
-You can use `map()`:
-
--   within `mutate()`, with all the tidy-eval goodness!
--   with additional arguments (after the function), e.g.:
-
-``` r
-mutate(
-  plot = map(data, histogram, carat)
-)
-```
-
-. . .
-
-equivalent to
-
-``` r
-plot[[1]] = histogram(data[[1]], carat)
-plot[[2]] = histogram(data[[2]], carat)
-...
-```
-
-## Our turn: starter-code
-
-``` r
-# from diamonds, create tibble with columns: clarity, data, plot, filename
-by_clarity_plot <-
-  diamonds |>
-  # nest by clarity
-  group_nest(clarity) |>
-  # create columns for plot, filename
-  mutate(
-    filename = str_glue("clarity-{clarity}.png")#,
-    #plot = map(),
-  ) |>
-  print()
-```
-
-## Our turn: more starter-code
-
-``` r
-# ?ggplot2::ggsave()
-ggsave_local <- function(filename, plot) {
-
-}
-
-# using filename and plot, write out plots to png files
-walk2(
-  by_clarity_plot$filename,
-  by_clarity_plot$plot,
-  # write plot file to data/clarity directory
-  ggsave_local
-)
-```
 
 ## Functions as arguments
 
@@ -340,7 +513,7 @@ ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
   scale_color_discrete(labels = tolower) # tolower is a function
 ```
 
-## If we have time (2)
+## If we have time
 
 Three fundamental operations in functional programming
 
