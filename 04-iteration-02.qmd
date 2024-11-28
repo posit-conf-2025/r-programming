@@ -20,9 +20,11 @@ bibliography: references.bib
 This session is (mostly) about functional programming:
 
 ::: incremental
+- Aside: managing file paths within your project
 - Example: read a bunch of files, then put them in a single data frame
-- Fundamental functions in {purrr}: 
+- Fundamental paradigms in {purrr}: 
    - `map()`, `keep()`, and `reduce()`
+- Adverbs to handle failure
 - More generally, using functions as arguments to functions 🤯
 :::
 
@@ -313,6 +315,17 @@ here("data/gapminder/1952.xlsx")
 
 `/Users/ijlyttle/repos/programming-r-exercises/data/gapminder/1952.xlsx`
 
+. . .
+
+<hr>
+
+::: {.caution-note}
+`here()` returns a string that represents a path. 
+
+It makes **no** guarantee that the path exists.
+:::
+
+
 ## Here: Epilogue
 
 `here()` works *especially* well if you need to rearrange your source (e.g. `.R`) files.
@@ -357,7 +370,7 @@ read_excel("1952.xlsx")
 
 ## Reading multiple files
 
-Iteration functions in {purrr} can help with repeatable tasks.
+Iteration functions in {purrr} can help with repetitive tasks.
 
 . . .
 
@@ -423,68 +436,9 @@ data <-
   print()
 ```
 
-## Handling failures
+## Fundamental paradigms
 
-If we have a failure, we may not want to stop everything.
-
-. . .
-
-```{r}
-#| error: true
-library("readr")
-read_csv("not/a/file.csv")
-```
-
-## Function operators
-
-Function operators:
-
--   take a function 
--   return a modified function
-
-. . .
-
-```{r}
-library("purrr")
-
-poss_read_csv <- possibly(read_csv, otherwise = NULL, quiet = FALSE)
-```
-
-. . .
-
-<hr>
-
-```{r}
-#| message: true
-poss_read_csv("not/a/file.csv")
-```
-
-. . .
-
-<hr>
-
-```{r}
-poss_read_csv(I("a, b\n 1, 2"), col_types = "dd")
-```
-
-## Our turn: Handle failure
-
-In the `programming-r-exercises` repository:
-
--   look at `data/gapminder_party/`
--   try running your script using this directory
-
-Create a new function:
-
-``` r
-possibly_read_excel <- possibly() # we do the rest
-```
-
-Use this function in your script.
-
-## Fundamental operations
-
-Functional programming has three fundamental operations; they act on lists or vectors:
+Functional programming has three fundamental paradigms; they act on lists or vectors:
 
 ::: incremental
 -   `map` - do *this* to each element: `purrr::map()`
@@ -495,6 +449,11 @@ Functional programming has three fundamental operations; they act on lists or ve
 . . . 
 
 Each of these takes a *function* as an argument, to tell the operator *what* to do.
+
+```{r}
+# TODO: open exercise file, restart R
+library("purrr")
+```
 
 ## Map: Intro {auto-animate=true}
 
@@ -715,7 +674,7 @@ num |> reduce(sum, .init = 1)
 | 3       |        |      
 | 4       | **11** |  
 
-## Supply additional arguments
+## Additional arguments
 
 ```{r}
 num <- c(1, 2, 3, NA, 4)
@@ -772,6 +731,65 @@ Adverbs modify verbs (functions):
  - `compose()`: put two functions together
  - `partial()`: pre-fill some arguments of a function
 :::
+
+## Adverb: Handling failures
+
+If we have a failure, we may not want to stop everything.
+
+. . .
+
+```{r}
+#| error: true
+library("readr")
+read_csv("not/a/file.csv")
+```
+
+## Function operators
+
+Function operators:
+
+-   take a function 
+-   return a modified function
+
+. . .
+
+```{r}
+library("purrr")
+
+poss_read_csv <- possibly(read_csv, otherwise = NULL, quiet = FALSE)
+```
+
+. . .
+
+<hr>
+
+```{r}
+#| message: true
+poss_read_csv("not/a/file.csv")
+```
+
+. . .
+
+<hr>
+
+```{r}
+poss_read_csv(I("a, b\n 1, 2"), col_types = "dd")
+```
+
+## Our turn: Handle failure
+
+In the `programming-r-exercises` repository:
+
+-   look at `data/gapminder_party/`
+-   try running your script using this directory
+
+Create a new function:
+
+``` r
+possibly_read_excel <- possibly() # we do the rest
+```
+
+Use this function in your script.
 
 ## Horrible example
 
@@ -965,19 +983,15 @@ In JavaScript, data frames are often arrays of objects (lists), so you'll see fo
 ## Summary
 
 ::: incremental
--   you can use `purrr::map()` to read a bunch of files
--   you can use `purrr::walk()` to write a bunch of files
--   functional programming has three foundational operations:
-    -   filter (`purrr::keep()`)
-    -   map
-    -   reduce
+- {here} can help you manage file paths within projects.
+- Functional programming:
+    - has three fundamental paradigms:
+      - filter (`purrr::keep()`), map, reduce
+      - {purrr} offers variants and adverbs
+- Adverbs can help you handle failure.
+- Functions can be used as arguments to functions.
+- Another view of data frames (if we had time).
 :::
-
-. . .
-
-<hr>
-
-Functional programming comes up a lot in JavaScript
 
 ## Wrap-up
 
