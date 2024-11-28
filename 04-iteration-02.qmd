@@ -307,6 +307,10 @@ Works just as well for `.Rmd`, `.qmd` files.
 
 <hr>
 
+```r
+here("data/gapminder/1952.xlsx")
+```
+
 `/Users/ijlyttle/repos/programming-r-exercises/data/gapminder/1952.xlsx`
 
 ## Here: Epilogue
