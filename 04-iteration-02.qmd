@@ -17,13 +17,13 @@ bibliography: references.bib
 
 ## Learning objectives
 
-In this session, we will discuss functional programming:
+This session is (mostly) about functional programming:
 
 ::: incremental
-- example: read a bunch of files, then put them in a single data frame
-- fundamental functions in {purrr}: 
+- Example: read a bunch of files, then put them in a single data frame
+- Fundamental functions in {purrr}: 
    - `map()`, `keep()`, and `reduce()`
-- more generally, using functions as arguments to functions 🤯
+- More generally, using functions as arguments to functions 🤯
 :::
 
 . . .
@@ -35,39 +35,25 @@ For coding, we will use `r-programming-exercises`:
 -   `R/iteration-02-01-reading-files.R`, etc.
 -   restart R
 
-## Reading multiple files
-
-Iteration functions in {purrr} can help with repeatable tasks.
-
-. . .
-
-### Example
-
-Read Excel files from a directory, then combine into a single data-frame.
-
 ## Aside: {here} package
 
-When you first call `here::here()`, (simplified):
+For me, `here::here()` is a truly magical function:
 
-::: incremental
--   climbs your local directory until it finds a `.RProj` file
--   sets directory containing `.RProj` as reference-path
--   `here::here()` prepends reference-path to argument
+::: {.incremental}
+- useful in scripts: `.R` files (like today!)
+- useful in documents: `.Rmd` and `.qmd` files
 :::
 
 . . .
 
-If project in `/Users/ian/important-project/`:
+If you need to:
 
-``` r
-here("data/file.csv")
-```
+  - refer to a file, and 
+  - it's in a *fixed* place *within* your project
 
-```         
-"/Users/ian/important-project/data/file.csv"
-```
+`here()` can make your life *much* simpler!
 
-## Here: Starts {auto-animate=true}
+## Here: Example {auto-animate=true}
 
 :::: {.columns}
 ::: {.column width="40px"}
@@ -88,7 +74,7 @@ here("data/file.csv")
 :::
 
 ::: {.column}
-```
+```{.text}
 /Users/ijlyttle/repos/programming-r-exercises/ 
 |-- programming-r-exercises.Rproj 
 |-- README.md
@@ -113,7 +99,7 @@ Within `iteration-02-01-reading-files.R`:
 
 Works just as well for `.Rmd`, `.qmd` files.
 
-## Here: Looks {auto-animate=true}
+## Here: Searches {auto-animate=true}
 
 :::: {.columns}
 ::: {.column width="40px"}
@@ -157,7 +143,7 @@ Works just as well for `.Rmd`, `.qmd` files.
 - Looks in directory for an `.Rproj` file (simplified)
 - Doesn't find one
 
-## Here: Moves up and looks {auto-animate=true}
+## Here: Moves up and searches {auto-animate=true}
 
 :::: {.columns}
 ::: {.column width="40px"}
@@ -323,12 +309,57 @@ Works just as well for `.Rmd`, `.qmd` files.
 
 `/Users/ijlyttle/repos/programming-r-exercises/data/gapminder/1952.xlsx`
 
-## Our turn
+## Here: Epilogue
 
-In the `programming-r-exercises` repository:
+`here()` works *especially* well if you need to rearrange your source (e.g. `.R`) files.
 
--   open `iteration-02-01-reading-files.R`
--   restart R
+. . .
+
+However, if you move your target files (e.g. `.xlsx`), you need to modify your source.
+
+. . .
+
+<hr>
+
+The *here* way:
+
+```r
+read_excel(here("data/gapminder/1952.xlsx"))
+```
+
+. . .
+
+<hr>
+
+::: {.callout-note icon=false title="🧐 Where `here()` can help"}
+```r
+read_excel("../data/gapminder/1952.xlsx")
+```
+:::
+
+. . .
+
+<hr>
+
+::: {.callout-important icon=false title="🔥 Meme Alert"}
+Do not do this:
+
+```r
+setwd("/Users/ijlyttle/repos/programming-r-exercises/data/gapminder")
+
+read_excel("1952.xlsx")
+```
+:::
+
+## Reading multiple files
+
+Iteration functions in {purrr} can help with repeatable tasks.
+
+. . .
+
+### Example
+
+Read Excel files from a directory, then combine into a single data-frame.
 
 ## Our turn: Reading data manually
 
