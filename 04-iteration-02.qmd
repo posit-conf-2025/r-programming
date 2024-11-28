@@ -67,6 +67,262 @@ here("data/file.csv")
 "/Users/ian/important-project/data/file.csv"
 ```
 
+## Here: Starts {auto-animate=true}
+
+:::: {.columns}
+::: {.column width="40px"}
+```
+
+
+
+
+
+
+
+
+
+
+👋
+
+```
+:::
+
+::: {.column}
+```
+/Users/ijlyttle/repos/programming-r-exercises/ 
+|-- programming-r-exercises.Rproj 
+|-- README.md
+|-- LICENCE.md
+|-- data/
+    |-- gapminder/
+        |-- 1952.xlsx
+        |-- ...
+    |-- ...
+|-- R/ 
+    |-- iteration-02-01-reading-files.R 
+    |-- ...
+```
+:::
+::::
+
+<hr>
+
+Within `iteration-02-01-reading-files.R`:
+
+- `here("data/gapminder/1952.xlsx")`
+
+Works just as well for `.Rmd`, `.qmd` files.
+
+## Here: Looks {auto-animate=true}
+
+:::: {.columns}
+::: {.column width="40px"}
+```
+
+
+
+
+
+
+
+
+
+🔎
+
+
+```
+:::
+
+::: {.column}
+```
+/Users/ijlyttle/repos/programming-r-exercises/ 
+|-- programming-r-exercises.Rproj 
+|-- README.md
+|-- LICENCE.md
+|-- data/
+    |-- gapminder/
+        |-- 1952.xlsx
+        |-- ...
+    |-- ...
+|-- R/ 
+    |-- iteration-02-01-reading-files.R 
+    |-- ...
+```
+:::
+::::
+
+
+<hr>
+
+- Looks in directory for an `.Rproj` file (simplified)
+- Doesn't find one
+
+## Here: Moves up and looks {auto-animate=true}
+
+:::: {.columns}
+::: {.column width="40px"}
+```
+🔎
+
+
+
+
+
+
+
+
+
+
+
+```
+:::
+
+::: {.column}
+```
+/Users/ijlyttle/repos/programming-r-exercises/ 
+|-- programming-r-exercises.Rproj 
+|-- README.md
+|-- LICENCE.md
+|-- data/
+    |-- gapminder/
+        |-- 1952.xlsx
+        |-- ...
+    |-- ...
+|-- R/ 
+    |-- iteration-02-01-reading-files.R 
+    |-- ...
+```
+:::
+::::
+
+<hr>
+
+- Moves up one directory
+- Looks again
+
+## Here: Finds `.Rproj` {auto-animate=true}
+
+:::: {.columns}
+::: {.column width="40px"}
+```
+
+✅
+
+
+
+
+
+
+
+
+
+
+```
+:::
+
+::: {.column}
+```
+/Users/ijlyttle/repos/programming-r-exercises/ 
+|-- programming-r-exercises.Rproj 
+|-- README.md
+|-- LICENCE.md
+|-- data/
+    |-- gapminder/
+        |-- 1952.xlsx
+        |-- ...
+    |-- ...
+|-- R/ 
+    |-- iteration-02-01-reading-files.R 
+    |-- ...
+```
+:::
+::::
+
+
+## Here: Flags project-root {auto-animate=true}
+
+:::: {.columns}
+::: {.column width="40px"}
+```
+🚩
+
+
+
+
+
+
+
+
+
+
+
+```
+:::
+
+::: {.column}
+```
+/Users/ijlyttle/repos/programming-r-exercises/ 
+|-- programming-r-exercises.Rproj 
+|-- README.md
+|-- LICENCE.md
+|-- data/
+    |-- gapminder/
+        |-- 1952.xlsx
+        |-- ...
+    |-- ...
+|-- R/ 
+    |-- iteration-02-01-reading-files.R 
+    |-- ...
+```
+:::
+::::
+
+<hr>
+
+`/Users/ijlyttle/repos/programming-r-exercises/`
+
+## Here: Returns full path {auto-animate=true}
+
+:::: {.columns}
+::: {.column width="40px"}
+```
+
+
+
+
+
+
+🎯
+
+
+
+
+
+```
+:::
+
+::: {.column}
+```
+/Users/ijlyttle/repos/programming-r-exercises/ 
+|-- programming-r-exercises.Rproj 
+|-- README.md
+|-- LICENCE.md
+|-- data/
+    |-- gapminder/
+        |-- 1952.xlsx
+        |-- ...
+    |-- ...
+|-- R/ 
+    |-- iteration-02-01-reading-files.R 
+    |-- ...
+```
+:::
+::::
+
+<hr>
+
+`/Users/ijlyttle/repos/programming-r-exercises/data/gapminder/1952.xlsx`
+
 ## Our turn
 
 In the `programming-r-exercises` repository:
