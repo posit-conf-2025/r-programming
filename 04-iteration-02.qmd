@@ -19,7 +19,7 @@ bibliography: references.bib
 
 This session is (mostly) about functional programming:
 
-::: incremental
+::: {.incremental}
 - Aside: managing file paths within your project
 - Example: read a bunch of files, then put them in a single data frame
 - Fundamental paradigms in {purrr}: 
