@@ -17,13 +17,13 @@ bibliography: references.bib
 
 ## Learning objectives
 
-In this session, we will discuss functional programming:
+This session is (mostly) about functional programming:
 
 ::: incremental
-- example: read a bunch of files, then put them in a single data frame
-- fundamental functions in {purrr}: 
+- Example: read a bunch of files, then put them in a single data frame
+- Fundamental functions in {purrr}: 
    - `map()`, `keep()`, and `reduce()`
-- more generally, using functions as arguments to functions 🤯
+- More generally, using functions as arguments to functions 🤯
 :::
 
 . . .
@@ -35,6 +35,326 @@ For coding, we will use `r-programming-exercises`:
 -   `R/iteration-02-01-reading-files.R`, etc.
 -   restart R
 
+## Aside: {here} package
+
+For me, `here::here()` is a truly magical function:
+
+::: {.incremental}
+- useful in scripts: `.R` files (like today!)
+- useful in documents: `.Rmd` and `.qmd` files
+:::
+
+. . .
+
+If you need to:
+
+  - refer to a file, and 
+  - it's in a *fixed* place *within* your project
+
+`here()` can make your life *much* simpler!
+
+## Here: Example {auto-animate=true}
+
+:::: {.columns}
+::: {.column width="40px"}
+```
+
+
+
+
+
+
+
+
+
+
+👋
+
+```
+:::
+
+::: {.column}
+```{.text}
+/Users/ijlyttle/repos/programming-r-exercises/ 
+|-- programming-r-exercises.Rproj 
+|-- README.md
+|-- LICENCE.md
+|-- data/
+    |-- gapminder/
+        |-- 1952.xlsx
+        |-- ...
+    |-- ...
+|-- R/ 
+    |-- iteration-02-01-reading-files.R 
+    |-- ...
+```
+:::
+::::
+
+<hr>
+
+Within `iteration-02-01-reading-files.R`:
+
+- `here("data/gapminder/1952.xlsx")`
+
+Works just as well for `.Rmd`, `.qmd` files.
+
+## Here: Searches {auto-animate=true}
+
+:::: {.columns}
+::: {.column width="40px"}
+```
+
+
+
+
+
+
+
+
+
+🔎
+
+
+```
+:::
+
+::: {.column}
+```
+/Users/ijlyttle/repos/programming-r-exercises/ 
+|-- programming-r-exercises.Rproj 
+|-- README.md
+|-- LICENCE.md
+|-- data/
+    |-- gapminder/
+        |-- 1952.xlsx
+        |-- ...
+    |-- ...
+|-- R/ 
+    |-- iteration-02-01-reading-files.R 
+    |-- ...
+```
+:::
+::::
+
+
+<hr>
+
+- Looks in directory for an `.Rproj` file (simplified)
+- Doesn't find one
+
+## Here: Moves up and searches {auto-animate=true}
+
+:::: {.columns}
+::: {.column width="40px"}
+```
+🔎
+
+
+
+
+
+
+
+
+
+
+
+```
+:::
+
+::: {.column}
+```
+/Users/ijlyttle/repos/programming-r-exercises/ 
+|-- programming-r-exercises.Rproj 
+|-- README.md
+|-- LICENCE.md
+|-- data/
+    |-- gapminder/
+        |-- 1952.xlsx
+        |-- ...
+    |-- ...
+|-- R/ 
+    |-- iteration-02-01-reading-files.R 
+    |-- ...
+```
+:::
+::::
+
+<hr>
+
+- Moves up one directory
+- Looks again
+
+## Here: Finds `.Rproj` {auto-animate=true}
+
+:::: {.columns}
+::: {.column width="40px"}
+```
+
+✅
+
+
+
+
+
+
+
+
+
+
+```
+:::
+
+::: {.column}
+```
+/Users/ijlyttle/repos/programming-r-exercises/ 
+|-- programming-r-exercises.Rproj 
+|-- README.md
+|-- LICENCE.md
+|-- data/
+    |-- gapminder/
+        |-- 1952.xlsx
+        |-- ...
+    |-- ...
+|-- R/ 
+    |-- iteration-02-01-reading-files.R 
+    |-- ...
+```
+:::
+::::
+
+
+## Here: Flags project-root {auto-animate=true}
+
+:::: {.columns}
+::: {.column width="40px"}
+```
+🚩
+
+
+
+
+
+
+
+
+
+
+
+```
+:::
+
+::: {.column}
+```
+/Users/ijlyttle/repos/programming-r-exercises/ 
+|-- programming-r-exercises.Rproj 
+|-- README.md
+|-- LICENCE.md
+|-- data/
+    |-- gapminder/
+        |-- 1952.xlsx
+        |-- ...
+    |-- ...
+|-- R/ 
+    |-- iteration-02-01-reading-files.R 
+    |-- ...
+```
+:::
+::::
+
+<hr>
+
+`/Users/ijlyttle/repos/programming-r-exercises/`
+
+## Here: Returns full path {auto-animate=true}
+
+:::: {.columns}
+::: {.column width="40px"}
+```
+
+
+
+
+
+
+🎯
+
+
+
+
+
+```
+:::
+
+::: {.column}
+```
+/Users/ijlyttle/repos/programming-r-exercises/ 
+|-- programming-r-exercises.Rproj 
+|-- README.md
+|-- LICENCE.md
+|-- data/
+    |-- gapminder/
+        |-- 1952.xlsx
+        |-- ...
+    |-- ...
+|-- R/ 
+    |-- iteration-02-01-reading-files.R 
+    |-- ...
+```
+:::
+::::
+
+<hr>
+
+```r
+here("data/gapminder/1952.xlsx")
+```
+
+`/Users/ijlyttle/repos/programming-r-exercises/data/gapminder/1952.xlsx`
+
+## Here: Epilogue
+
+`here()` works *especially* well if you need to rearrange your source (e.g. `.R`) files.
+
+. . .
+
+However, if you move your target files (e.g. `.xlsx`), you need to modify your source.
+
+. . .
+
+<hr>
+
+The *here* way:
+
+```r
+read_excel(here("data/gapminder/1952.xlsx"))
+```
+
+. . .
+
+<hr>
+
+::: {.callout-note icon=false title="🧐 Where `here()` can help"}
+```r
+read_excel("../data/gapminder/1952.xlsx")
+```
+:::
+
+. . .
+
+<hr>
+
+::: {.callout-important icon=false title="🔥 Meme Alert"}
+Do not do this:
+
+```r
+setwd("/Users/ijlyttle/repos/programming-r-exercises/data/gapminder")
+
+read_excel("1952.xlsx")
+```
+:::
+
 ## Reading multiple files
 
 Iteration functions in {purrr} can help with repeatable tasks.
@@ -44,35 +364,6 @@ Iteration functions in {purrr} can help with repeatable tasks.
 ### Example
 
 Read Excel files from a directory, then combine into a single data-frame.
-
-## Aside: {here} package
-
-When you first call `here::here()`, (simplified):
-
-::: incremental
--   climbs your local directory until it finds a `.RProj` file
--   sets directory containing `.RProj` as reference-path
--   `here::here()` prepends reference-path to argument
-:::
-
-. . .
-
-If project in `/Users/ian/important-project/`:
-
-``` r
-here("data/file.csv")
-```
-
-```         
-"/Users/ian/important-project/data/file.csv"
-```
-
-## Our turn
-
-In the `programming-r-exercises` repository:
-
--   open `iteration-02-01-reading-files.R`
--   restart R
 
 ## Our turn: Reading data manually
 
