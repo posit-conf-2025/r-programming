@@ -74,7 +74,7 @@ In the `programming-r-exercises` repository:
 -   open `iteration-02-01-reading-files.R`
 -   restart R
 
-## Our turn: reading data manually
+## Our turn: Reading data manually
 
 Here's our starting code:
 
@@ -95,7 +95,7 @@ What problems do you see?
 
 Run this example code, discuss with your neighbor.
 
-## Our turn: make list of paths
+## Our turn: Make list of paths
 
 I see this as a two step problem:
 
@@ -117,7 +117,7 @@ paths <-
   print()
 ```
 
-## Our turn: read data
+## Our turn: Read data
 
 Let's work together to improve this code to read data:
 
@@ -176,7 +176,7 @@ poss_read_csv("not/a/file.csv")
 poss_read_csv(I("a, b\n 1, 2"), col_types = "dd")
 ```
 
-## Our turn: handle failure
+## Our turn: Handle failure
 
 In the `programming-r-exercises` repository:
 
@@ -252,7 +252,7 @@ map(num, \(x) x + 1)
 | 3       | **4**  |      
 | 4       | **5**  |   
 
-## Map: Atomic Variants
+## Map: Atomic variants
 
 :::: {.columns}
 
@@ -460,7 +460,7 @@ Using an anonymous function will:
  - make it more explicit which argument goes to which function.
  - tend to yield better error messages.
 
-## Variants and Adverbs
+## Variants and adverbs
 
 Some useful variants, can mix and match:
 
