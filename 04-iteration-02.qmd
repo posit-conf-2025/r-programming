@@ -424,7 +424,41 @@ reduce(num, sum, .init = 1)
 | 3       |        |      
 | 4       | **11** |  
 
-## Use dots
+## Supply additional arguments
+
+```{r}
+num <- c(1, 2, 3, NA, 4)
+reduce(num, sum)
+```
+
+. . .
+
+The default behavior for `sum()` is not to remove `NA` values.
+
+. . .
+
+<hr>
+
+To change the behavior, use an anonymous function:
+
+```{r}
+reduce(num, \(acc, x) sum(acc, x, na.rm = TRUE))
+```
+
+. . .
+
+::: {.callout-caution title="No longer recommended"}
+
+```r
+# TODO: check that newer Quarto will fix font-size here
+reduce(num, sum, na.rm = TRUE)
+```
+::: 
+
+Using an anonymous function will:
+
+ - make it more explicit which argument goes to which function.
+ - tend to yield better error messages.
 
 ## Variants and Adverbs
 
