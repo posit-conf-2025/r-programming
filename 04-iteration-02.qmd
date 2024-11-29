@@ -832,7 +832,18 @@ Let's run this, uncommenting one line at a time.
 
 ## Functions as arguments
 
-Some inspiring words.
+We have seen functions as arguments in:
+
+::: incremental
+- `map()`, `keep()`, `reduce()`: tells them what to do
+- adverbs, like `possibly()`: tells what behavior to modify
+:::
+
+. . .
+
+Using functions, themselves, as arguments takes a little getting used-to.
+
+Once you wrap your mind around it, it's like seeing in more dimensions.
 
 . . .
 
@@ -843,16 +854,97 @@ For coding, we will use `r-programming-exercises`:
 -   Open `R/iteration-02-04-functions-as-arguments.R`.
 -   Restart R.
 
-## Labellers
+## Labelling scales
 
 ```{r}
 library("tidyverse")
 library("palmerpenguins")
 
 ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
-  geom_point() +
+  geom_point()
+```
+
+. . .
+
+What if we want lower-case names for the species?
+
+## Specify labels
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
+  geom_point() + 
+  scale_color_discrete(labels = c("adelaide", "chinstrap", "gentoo"))
+```
+
+. . .
+
+We can do it manually, but what if we get a dataset with more species?
+
+## Use a labelling function
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
+  geom_point() + 
   scale_color_discrete(labels = tolower) # tolower is a function
 ```
+
+. . .
+
+Look at `?discrete_scale`: `labels` can take a function.
+
+## Function factories
+
+Function operators (adverbs) return modified functions 🤯
+
+Function factories return functions "out of thin air" 🤯🤯
+
+. . .
+
+<hr>
+
+[{scales}](https://scales.r-lib.org/index.html), used for {ggplot2} is full of these function factories!
+
+## Our turn: Labeller
+
+```{r}
+## use scales:: notation, vs. library(), to help autocomplete
+percent_labeller <- scales::label_percent(accuracy = 1)
+```
+
+. . .
+
+<hr>
+
+```{r}
+# percent_labeller is a function
+percent_labeller(c(0, 0.01, 0.1, 1))
+```
+
+Play around with:
+
+ - `accuracy`
+ - values sent to `percent_labeller`
+ - whatever else seems interesting to you
+ 
+## Your turn: Labeller
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, color = species)) +
+  stat_ecdf()
+```
+
+Add `scale_y_continuous()` to this plot, to use a percentage-labeller.
+
+ 
+## Your turn: Labeller (solution)
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, color = species)) +
+  stat_ecdf() +
+  scale_y_continuous(labels = scales::label_percent(accuracy = 1))
+```
+
+To me, this is a cleaner solution than mutating the data from decimal to percent.
 
 ## If we have time
 
