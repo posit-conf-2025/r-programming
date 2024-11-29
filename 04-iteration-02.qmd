@@ -34,8 +34,8 @@ This session is (mostly) about functional programming:
 
 For coding, we will use `r-programming-exercises`:
 
--   `R/iteration-02-01-reading-files.R`, etc.
--   restart R
+-   Open `R/iteration-02-01-reading-files.R`.
+-   Restart R.
 
 ## Aside: {here} package
 
@@ -450,10 +450,18 @@ Functional programming has three fundamental paradigms; they act on lists or vec
 
 Each of these takes a *function* as an argument, to tell the operator *what* to do.
 
-```{r}
-# TODO: open exercise file, restart R
+```{r echo=FALSE}
 library("purrr")
 ```
+
+. . .
+
+<hr>
+
+For coding, we will use `r-programming-exercises`:
+
+-   Open `R/iteration-02-02-fundamental-paradigms.R`.
+-   Restart R.
 
 ## Map: Intro {auto-animate=true}
 
@@ -732,7 +740,7 @@ Adverbs modify verbs (functions):
  - `partial()`: pre-fill some arguments of a function
 :::
 
-## Adverb: Handling failures
+## Handling failures with adverbs
 
 If we have a failure, we may not want to stop everything.
 
@@ -744,7 +752,16 @@ library("readr")
 read_csv("not/a/file.csv")
 ```
 
-## Function operators
+. . .
+
+<hr>
+
+For coding, we will use `r-programming-exercises`:
+
+-   Open `R/iteration-02-03-adverbs.R`.
+-   Restart R.
+
+## Function operators a.k.a. adverbs
 
 Function operators:
 
@@ -791,27 +808,42 @@ possibly_read_excel <- possibly() # we do the rest
 
 Use this function in your script.
 
-## Horrible example
+## Our Turn: re-implement `list_rbind()`
 
-Re-imagine `list_rbind()` using functional-programming techniques:
+Re-implement `list_rbind()` using functional-programming techniques:
 
 ``` r
-# TODO: check
-list_rbind2 <- function(list_df, names_to) {
-  list_df |>
-    purrr::keep(negate(is.null)) |>
-    purrr::lmap(\(d, name) dplyr::mutate(d, "{names_to}" := name)) |>
-    purrr::reduce(rbind)
-}
+data_reimplemented <-
+  paths_party |>
+  map(poss_read_excel) |>
+  # keep(negate(is.null)) |>
+  # imap(\(df, name) mutate(df, "year" := parse_number(name))) |>
+  # reduce(rbind) |>
+  print()
 ```
 
+Let's run this, uncommenting one line at a time.
+
 ::: incremental
--   *filters* in not-`NULL` values, `purrr::keep()`
+-   *keeps* not-`NULL` values, `purrr::keep()`
 -   *maps* name of element to data-column, `purrr::imap()`
 -   *reduces* list to single data-frame, `purrr::reduce()`
 :::
 
 ## Functions as arguments
+
+Some inspiring words.
+
+. . .
+
+<hr>
+
+For coding, we will use `r-programming-exercises`:
+
+-   Open `R/iteration-02-04-functions-as-arguments.R`.
+-   Restart R.
+
+## Labellers
 
 ```{r}
 library("tidyverse")
@@ -833,6 +865,15 @@ Given a list and a function:
 -   `map()`: make a new list, operating on each element
 -   `reduce()`: make a new "thing"
 :::
+
+. . .
+
+<hr>
+
+For coding, we will use `r-programming-exercises`:
+
+-   Open `R/iteration-02-05-dpurrr.R`.
+-   Restart R.
 
 ## dplyr using purrr?
 
