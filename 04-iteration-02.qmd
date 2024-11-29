@@ -832,7 +832,11 @@ Let's run this, uncommenting one line at a time.
 
 ## Functions as arguments
 
-Some inspiring words.
+We often think of function arguments being things like numbers, strings, and lists.
+
+Using functions, themselves, as arguments takes a little getting used-to.
+
+Once you wrap your mind around it, it's like seeing in more dimensions.
 
 . . .
 
