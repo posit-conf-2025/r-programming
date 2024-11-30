@@ -808,7 +808,7 @@ possibly_read_excel <- possibly() # we do the rest
 
 Use this function in your script.
 
-## Our Turn: re-implement `list_rbind()`
+## Our turn: Re-implement `list_rbind()`
 
 Re-implement `list_rbind()` using functional-programming techniques:
 
@@ -1041,7 +1041,7 @@ mtcars |>
 Comment and change lines as you see fit.
 
 
-## Our turn: Filter {auto-animate=true}
+## Our turn: dpurrr filter (first element) {auto-animate=true}
 
 ```r
 # filter is just purrr::keep()
@@ -1052,7 +1052,7 @@ mtcars |>
   print()
 ```
 
-Predicate function acts on each list, `d`:
+Predicate function acts on each "row", `d`, which is a list:
 
 ```{r echo=FALSE}
 mtcars_list <- mtcars |> dpurrr_to_list()
@@ -1063,7 +1063,7 @@ str_element <- \(.x, i) .x[[i]] |> str()
 
 :::: {.columns}
 
-::: {.column .opacity-75 width="16%"}
+::: {.column .opacity-67 width="16%"}
 ```{r echo=FALSE}
 str_element(mtcars_list, 1)
 ```
@@ -1071,7 +1071,7 @@ str_element(mtcars_list, 1)
 
 ::::
 
-## Our turn: Filter - 2 {auto-animate=true}
+## Our turn: dpurrr filter (more elements) {auto-animate=true}
 
 ```r
 # filter is just purrr::keep()
@@ -1082,41 +1082,41 @@ mtcars |>
   print()
 ```
 
-Predicate function acts on each list, `d`:
+Predicate function acts on each "row", `d`, which is a list:
 
 :::: {.columns}
 
-::: {.column .opacity-75 width="16%"}
+::: {.column .opacity-67 width="16%"}
 ```{r echo=FALSE}
 str_element(mtcars_list, 1)
 ```
 :::
 
-::: {.column .opacity-75 width="16%"}
+::: {.column .opacity-67 width="16%"}
 ```{r echo=FALSE}
 str_element(mtcars_list, 2)
 ```
 :::
 
-::: {.column .opacity-75 width="16%"}
+::: {.column .opacity-67 width="16%"}
 ```{r echo=FALSE}
 str_element(mtcars_list, 3)
 ```
 :::
 
-::: {.column .opacity-75 width="16%"}
+::: {.column .opacity-67 width="16%"}
 ```{r echo=FALSE}
 str_element(mtcars_list, 4)
 ```
 :::
 
-::: {.column .opacity-75 width="16%"}
+::: {.column .opacity-67 width="16%"}
 ```{r echo=FALSE}
 str_element(mtcars_list, 5)
 ```
 :::
 
-::: {.column .opacity-75 width="16%"}
+::: {.column .opacity-67 width="18%"}
 ```{r echo=FALSE}
 str_element(mtcars_list, 6)
 ```
@@ -1124,7 +1124,7 @@ str_element(mtcars_list, 6)
 
 ::::
 
-## Our turn: Filter - 3 {auto-animate=true}
+## Our turn: dpurrr filter (element results) {auto-animate=true}
 
 ```r
 # filter is just purrr::keep()
@@ -1135,23 +1135,23 @@ mtcars |>
   print()
 ```
 
-Predicate function acts on each list, `d`:
+Predicate function acts on each "row", `d`, which is a list:
 
 :::: {.columns}
 
-::: {.column .opacity-50 width="16%"}
+::: {.column .opacity-33 width="16%"}
 ```{r echo=FALSE}
 str_element(mtcars_list, 1)
 ```
 :::
 
-::: {.column .opacity-50 width="16%"}
+::: {.column .opacity-33 width="16%"}
 ```{r echo=FALSE}
 str_element(mtcars_list, 2)
 ```
 :::
 
-::: {.column .opacity-50 width="16%"}
+::: {.column .opacity-33 width="16%"}
 ```{r echo=FALSE}
 str_element(mtcars_list, 3)
 ```
@@ -1169,7 +1169,7 @@ str_element(mtcars_list, 5)
 ```
 :::
 
-::: {.column width="16%"}
+::: {.column width="18%"}
 ```{r echo=FALSE}
 str_element(mtcars_list, 6)
 ```
@@ -1177,28 +1177,190 @@ str_element(mtcars_list, 6)
 
 ::::
 
-## `dpurrr_mutate()`
+
+## Our turn: dpurrr filter (result) {auto-animate=true}
+
+```r
+# filter is just purrr::keep()
+mtcars |>
+  dpurrr_to_list() |>
+  keep(\(d) d$gear == 3) |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+Re-assembled into a tibble:
+
+```{r echo=FALSE}
+# filter is just purrr::keep()
+mtcars |>
+  dpurrr_to_list() |>
+  keep(\(d) d$gear == 3) |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+
+## Our turn: dpurrr mutate {auto-animate=true}
 
 ```{r}
-dpurrr_mutate <- function(df, mapper) {
-  df |>
-    as.list() |>
-    purrr::list_transpose(simplify = FALSE) |>
-    purrr::map(\(d) c(d, mapper(d))) |>
-    purrr::list_transpose() |>
-    as.data.frame() 
+dpurrr_mutate <- function(.x, mapper) {
+  .x |> purrr::map(\(d) modifyList(d, mapper(d)))
 }
+```
+
+This version of mutate operates on every "row", modifying its list.
+
+```r
+mtcars |>
+  dpurrr_to_list() |>
+  dpurrr_mutate(\(d) list(wt_kg = d$wt * 1000 / 2.2)) |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+## Our turn: dpurrr mutate (by row, before) {auto-animate=true}
+
+
+This version of mutate operates on every "row", modifying its list.
+
+```r
+mtcars |>
+  dpurrr_to_list() |>
+  dpurrr_mutate(\(d) list(wt_kg = d$wt * 1000 / 2.2)) |>
+  dpurrr_to_tibble() |>
+  print()
 ```
 
 . . .
 
 <hr>
 
-```{r}
-mtcars |> 
-  dpurrr_mutate(\(d) list(wt_kg = d$wt * 1000 / 2.2)) |> 
-  head()
+:::: {.columns}
+
+::: {.column .opacity-67 width="16%"}
+```{r echo=FALSE}
+str_element(mtcars_list, 1)
 ```
+:::
+
+::: {.column .opacity-67 width="16%"}
+```{r echo=FALSE}
+str_element(mtcars_list, 2)
+```
+:::
+
+::: {.column .opacity-67 width="16%"}
+```{r echo=FALSE}
+str_element(mtcars_list, 3)
+```
+:::
+
+::: {.column .opacity-67 width="16%"}
+```{r echo=FALSE}
+str_element(mtcars_list, 4)
+```
+:::
+
+::: {.column .opacity-67 width="16%"}
+```{r echo=FALSE}
+str_element(mtcars_list, 5)
+```
+:::
+
+::: {.column .opacity-67 width="16%"}
+```{r echo=FALSE}
+str_element(mtcars_list, 6)
+```
+:::
+
+::::
+
+## Our turn: dpurrr mutate (by row, after) {auto-animate=true auto-animate-unmatched=false}
+
+
+This version of mutate operates on every "row", modifying its list.
+
+```r
+mtcars |>
+  dpurrr_to_list() |>
+  dpurrr_mutate(\(d) list(wt_kg = d$wt * 1000 / 2.2)) |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+<hr>
+
+```{r echo=FALSE}
+mtcars_mutate_list <- 
+  mtcars |>
+  dpurrr_to_list() |>
+  dpurrr_mutate(\(d) list(wt_kg = d$wt * 1000 / 2.2))
+```
+
+:::: {.columns}
+
+::: {.column width="16%"}
+```{r echo=FALSE}
+str_element(mtcars_mutate_list, 1)
+```
+:::
+
+::: {.column width="16%"}
+```{r echo=FALSE}
+str_element(mtcars_mutate_list, 2)
+```
+:::
+
+::: {.column width="16%"}
+```{r echo=FALSE}
+str_element(mtcars_mutate_list, 3)
+```
+:::
+
+::: {.column width="16%"}
+```{r echo=FALSE}
+str_element(mtcars_mutate_list, 4)
+```
+:::
+
+::: {.column width="16%"}
+```{r echo=FALSE}
+str_element(mtcars_mutate_list, 5)
+```
+:::
+
+::: {.column width="16%"}
+```{r echo=FALSE}
+str_element(mtcars_mutate_list, 6)
+```
+:::
+
+::::
+
+## Our turn: dpurrr mutate (result) {auto-animate=true}
+
+
+This version of mutate operates on every "row", modifying its list.
+
+```r
+mtcars |>
+  dpurrr_to_list() |>
+  dpurrr_mutate(\(d) list(wt_kg = d$wt * 1000 / 2.2)) |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+<hr>
+
+```{r echo=FALSE}
+mtcars |>
+  dpurrr_to_list() |>
+  dpurrr_mutate(\(d) list(wt_kg = d$wt * 1000 / 2.2)) |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
 
 ## `dpurrr_summarise()`
 
