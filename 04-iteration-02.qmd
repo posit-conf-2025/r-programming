@@ -948,7 +948,7 @@ To me, this is a cleaner solution than mutating the data from decimal to percent
 
 ## If we have time
 
-Three fundamental operations in functional programming
+Three fundamental paradigms in functional programming
 
 Given a list and a function:
 
@@ -969,10 +969,10 @@ For coding, we will use `r-programming-exercises`:
 
 ## dplyr using purrr?
 
-We can use `map()`, `filter()`, `reduce()` to "implement", using purrr:
+We can use `purrr::keep()`, `purrr::map()`, `purrr::reduce()` to "implement":
 
--   `dplyr::mutate()`
 -   `dplyr::filter()`
+-   `dplyr::mutate()`
 -   `dplyr::summarise()`
 
 . . .
@@ -1003,26 +1003,179 @@ I claim it's possible, I don't claim it's a good idea.
     ```
 :::
 
-## `dpurrr_filter()`
+## Our turn: Helper functions
 
-```{r}
-dpurrr_filter <- function(df, predicate) {
-  df |>
+We have a couple of helper functions to convert to:
+
+ - data frames: column-based
+ - lists of lists: row-based
+
+```{r echo=FALSE}
+# start with a couple of helpers
+dpurrr_to_list <- function(.data) {
+  .data |>
     as.list() |>
-    purrr::list_transpose(simplify = FALSE) |>
-    purrr::keep(predicate) |>
-    purrr::list_transpose() |>
-    as.data.frame() 
+    purrr::list_transpose(simplify = FALSE)
 }
+
+dpurrr_to_tibble <- function(.x) {
+  .x |>
+    purrr::list_transpose() |>
+    tibble::as_tibble()
+}
+```
+ 
+<hr>
+
+Run the code to create `dpurrr_to_list()` and `dpurrr_to_tibble()`, then experiment with:
+
+```r
+# try out our helpers
+mtcars |>
+  head(1) |>
+  dpurrr_to_list() |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+Comment and change lines as you see fit.
+
+
+## Our turn: Filter {auto-animate=true}
+
+```r
+# filter is just purrr::keep()
+mtcars |>
+  dpurrr_to_list() |>
+  keep(\(d) d$gear == 3) |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+Predicate function acts on each list, `d`:
+
+```{r echo=FALSE}
+mtcars_list <- mtcars |> dpurrr_to_list()
+str_element <- \(.x, i) .x[[i]] |> str()
 ```
 
 . . .
 
-<hr>
+:::: {.columns}
 
-```{r}
-dpurrr_filter(mtcars, \(d) d$gear == 3) |> head()
+::: {.column .opacity-75 width="16%"}
+```{r echo=FALSE}
+str_element(mtcars_list, 1)
 ```
+:::
+
+::::
+
+## Our turn: Filter - 2 {auto-animate=true}
+
+```r
+# filter is just purrr::keep()
+mtcars |>
+  dpurrr_to_list() |>
+  keep(\(d) d$gear == 3) |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+Predicate function acts on each list, `d`:
+
+:::: {.columns}
+
+::: {.column .opacity-75 width="16%"}
+```{r echo=FALSE}
+str_element(mtcars_list, 1)
+```
+:::
+
+::: {.column .opacity-75 width="16%"}
+```{r echo=FALSE}
+str_element(mtcars_list, 2)
+```
+:::
+
+::: {.column .opacity-75 width="16%"}
+```{r echo=FALSE}
+str_element(mtcars_list, 3)
+```
+:::
+
+::: {.column .opacity-75 width="16%"}
+```{r echo=FALSE}
+str_element(mtcars_list, 4)
+```
+:::
+
+::: {.column .opacity-75 width="16%"}
+```{r echo=FALSE}
+str_element(mtcars_list, 5)
+```
+:::
+
+::: {.column .opacity-75 width="16%"}
+```{r echo=FALSE}
+str_element(mtcars_list, 6)
+```
+:::
+
+::::
+
+## Our turn: Filter - 3 {auto-animate=true}
+
+```r
+# filter is just purrr::keep()
+mtcars |>
+  dpurrr_to_list() |>
+  keep(\(d) d$gear == 3) |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+Predicate function acts on each list, `d`:
+
+:::: {.columns}
+
+::: {.column .opacity-50 width="16%"}
+```{r echo=FALSE}
+str_element(mtcars_list, 1)
+```
+:::
+
+::: {.column .opacity-50 width="16%"}
+```{r echo=FALSE}
+str_element(mtcars_list, 2)
+```
+:::
+
+::: {.column .opacity-50 width="16%"}
+```{r echo=FALSE}
+str_element(mtcars_list, 3)
+```
+:::
+
+::: {.column width="16%"}
+```{r echo=FALSE}
+str_element(mtcars_list, 4)
+```
+:::
+
+::: {.column width="16%"}
+```{r echo=FALSE}
+str_element(mtcars_list, 5)
+```
+:::
+
+::: {.column width="16%"}
+```{r echo=FALSE}
+str_element(mtcars_list, 6)
+```
+:::
+
+::::
 
 ## `dpurrr_mutate()`
 
