@@ -1202,65 +1202,56 @@ dpurrr_mutate <- function(.x, mapper) {
 This version of mutate operates on every "row", modifying its list.
 
 ```r
-mtcars |>
+penguins_local |>
   dpurrr_to_list() |>
-  dpurrr_mutate(\(d) list(wt_kg = d$wt * 1000 / 2.2)) |>
+  dpurrr_mutate(\(d) list(body_mass_kg = d$body_mass_g / 1000)) |>
   dpurrr_to_tibble() |>
   print()
+```
+
+## Our turn: dpurrr mutate (start) {auto-animate=true}
+
+```{.r code-line-numbers="1-1"}
+penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_mutate(\(d) list(body_mass_kg = d$body_mass_g / 1000)) |>
+  dpurrr_to_tibble()
+```
+
+<hr>
+
+```{r echo=FALSE}
+penguins_local
 ```
 
 ## Our turn: dpurrr mutate (by row, before) {auto-animate=true}
 
-
-This version of mutate operates on every "row", modifying its list.
-
-```r
-mtcars |>
+```{.r code-line-numbers="1-2"}
+penguins_local |>
   dpurrr_to_list() |>
-  dpurrr_mutate(\(d) list(wt_kg = d$wt * 1000 / 2.2)) |>
-  dpurrr_to_tibble() |>
-  print()
+  dpurrr_mutate(\(d) list(body_mass_kg = d$body_mass_g / 1000)) |>
+  dpurrr_to_tibble()
 ```
-
-. . .
 
 <hr>
 
 :::: {.columns}
 
-::: {.column .opacity-67 width="16%"}
+::: {.column .opacity-67 width="33%"}
 ```{r echo=FALSE}
-str_element(mtcars_list, 1)
+str_element(penguins_list, 1)
 ```
 :::
 
-::: {.column .opacity-67 width="16%"}
+::: {.column .opacity-67 width="33%"}
 ```{r echo=FALSE}
-str_element(mtcars_list, 2)
+str_element(penguins_list, 2)
 ```
 :::
 
-::: {.column .opacity-67 width="16%"}
+::: {.column .opacity-67 width="33%"}
 ```{r echo=FALSE}
-str_element(mtcars_list, 3)
-```
-:::
-
-::: {.column .opacity-67 width="16%"}
-```{r echo=FALSE}
-str_element(mtcars_list, 4)
-```
-:::
-
-::: {.column .opacity-67 width="16%"}
-```{r echo=FALSE}
-str_element(mtcars_list, 5)
-```
-:::
-
-::: {.column .opacity-67 width="16%"}
-```{r echo=FALSE}
-str_element(mtcars_list, 6)
+str_element(penguins_list, 3)
 ```
 :::
 
@@ -1268,20 +1259,21 @@ str_element(mtcars_list, 6)
 
 ## Our turn: dpurrr mutate (by row, after) {auto-animate=true auto-animate-unmatched=false}
 
-
-This version of mutate operates on every "row", modifying its list.
-
-```r
-mtcars |>
+```{.r code-line-numbers="1-3"}
+penguins_local |>
   dpurrr_to_list() |>
-  dpurrr_mutate(\(d) list(wt_kg = d$wt * 1000 / 2.2)) |>
-  dpurrr_to_tibble() |>
-  print()
+  dpurrr_mutate(\(d) list(body_mass_kg = d$body_mass_g / 1000)) |>
+  dpurrr_to_tibble()
 ```
 
 <hr>
 
 ```{r echo=FALSE}
+penguins_mutate_list <- 
+  penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_mutate(\(d) list(body_mass_kg = d$body_mass_g / 1000)) 
+ 
 mtcars_mutate_list <- 
   mtcars |>
   dpurrr_to_list() |>
@@ -1290,39 +1282,21 @@ mtcars_mutate_list <-
 
 :::: {.columns}
 
-::: {.column width="16%"}
+::: {.column width="33%"}
 ```{r echo=FALSE}
-str_element(mtcars_mutate_list, 1)
+str_element(penguins_mutate_list, 1)
 ```
 :::
 
-::: {.column width="16%"}
+::: {.column width="33%"}
 ```{r echo=FALSE}
-str_element(mtcars_mutate_list, 2)
+str_element(penguins_mutate_list, 2)
 ```
 :::
 
-::: {.column width="16%"}
+::: {.column width="33%"}
 ```{r echo=FALSE}
-str_element(mtcars_mutate_list, 3)
-```
-:::
-
-::: {.column width="16%"}
-```{r echo=FALSE}
-str_element(mtcars_mutate_list, 4)
-```
-:::
-
-::: {.column width="16%"}
-```{r echo=FALSE}
-str_element(mtcars_mutate_list, 5)
-```
-:::
-
-::: {.column width="16%"}
-```{r echo=FALSE}
-str_element(mtcars_mutate_list, 6)
+str_element(penguins_mutate_list, 3)
 ```
 :::
 
@@ -1330,27 +1304,22 @@ str_element(mtcars_mutate_list, 6)
 
 ## Our turn: dpurrr mutate (result) {auto-animate=true}
 
-
-This version of mutate operates on every "row", modifying its list.
-
-```r
-mtcars |>
+```{.r code-line-numbers="1-4"}
+penguins_local |>
   dpurrr_to_list() |>
-  dpurrr_mutate(\(d) list(wt_kg = d$wt * 1000 / 2.2)) |>
-  dpurrr_to_tibble() |>
-  print()
+  dpurrr_mutate(\(d) list(body_mass_kg = d$body_mass_g / 1000)) |>
+  dpurrr_to_tibble()
 ```
 
 <hr>
 
 ```{r echo=FALSE}
-mtcars |>
+penguins_local |>
   dpurrr_to_list() |>
-  dpurrr_mutate(\(d) list(wt_kg = d$wt * 1000 / 2.2)) |>
+  dpurrr_mutate(\(d) list(body_mass_kg = d$body_mass_g / 1000)) |>
   dpurrr_to_tibble() |>
   print()
 ```
-
 
 ## `dpurrr_summarise()`
 
