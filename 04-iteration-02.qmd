@@ -981,14 +981,13 @@ I claim it's possible, I don't claim it's a good idea.
 
 ## Our turn: Simplified penguins
 
-To display on slides, let's use a simpified `penguins` dataset (sorry Allison!):
-
 ```{r}
 library("conflicted")
 library("palmerpenguins")
 library("dplyr")
 library("purrr")
 
+# simplify penguins (Sorry Allison!)
 penguins_local <-
   penguins |>
   mutate(across(where(is.factor), as.character)) |> # use strings, not factors
@@ -1006,7 +1005,7 @@ penguins_local <-
       "species": ["Adelie", "Adelie", ...],
       "island": ["Torgersen", "Torgersen", ...],
       "body_mass_g": [3750, 3800, ...],
-      "sex": ["male", "female", ...],
+      "sex": ["male", "female", ...]
     }
     ```
 
@@ -1025,19 +1024,7 @@ penguins_local <-
 
 We have a couple of helper functions to convert to:
 
-- lists of lists: row-based
- 
-  ```{r}
-  #' @param .data  data frame or tibble
-  #' @return unnamed list of named lists
-  dpurrr_to_list <- function(.data) {
-    .data |>
-      as.list() |>
-      purrr::list_transpose(simplify = FALSE)
-  }
-  ```
-
-- data frames: column-based
+- Data frames: column-based
 
   ```{r}
   #' @param .x  unnamed list of named lists 
@@ -1048,10 +1035,20 @@ We have a couple of helper functions to convert to:
       tibble::as_tibble()
   }
   ```
+
+- Lists of lists: row-based
+ 
+  ```{r}
+  #' @param .data  data frame or tibble
+  #' @return unnamed list of named lists
+  dpurrr_to_list <- function(.data) {
+    .data |>
+      as.list() |>
+      purrr::list_transpose(simplify = FALSE)
+  }
+  ```
  
 ## Our turn: experiment
-
-Run the code through `dpurrr_to_list()` and `dpurrr_to_tibble()`, then experiment with:
 
 ```{r}
 # experiment with helpers
@@ -1063,7 +1060,6 @@ penguins_local |>
 ```
 
 Comment and change lines as you see fit.
-
 
 ## Our turn: dpurrr filter (first element) {auto-animate=true}
 
