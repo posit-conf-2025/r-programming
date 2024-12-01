@@ -979,16 +979,34 @@ We can use `purrr::keep()`, `purrr::map()`, `purrr::reduce()` to "implement":
 
 I claim it's possible, I don't claim it's a good idea.
 
-## Tabular data: two perspectives
+## Our turn: Simplified penguins
+
+To display on slides, let's use a simpified `penguins` dataset (sorry Allison!):
+
+```{r}
+library("conflicted")
+library("palmerpenguins")
+library("dplyr")
+library("purrr")
+
+penguins_local <-
+  penguins |>
+  mutate(across(where(is.factor), as.character)) |> # use strings, not factors
+  select(species, island, body_mass_g, sex) |>      # fewer columns
+  print()
+```
+
+## Tabular data: Two perspectives
 
 ::: incremental
 -   column-based: named list of column vectors
 
     ``` json
     {
-      mpg: [21.0, 22.8, ...],
-      cyl: [6, 4, ...],
-      ...
+      "species": ["Adelie", "Adelie", ...],
+      "island": ["Torgersen", "Torgersen", ...],
+      "body_mass_g": [3750, 3800, ...],
+      "sex": ["male", "female", ...],
     }
     ```
 
@@ -996,8 +1014,8 @@ I claim it's possible, I don't claim it's a good idea.
 
     ``` json
     [
-      {mpg: 21.0, cyl: 6, ...}, 
-      {mpg: 22.8, cyl: 4, ...}, 
+      {"species": "Adelie", "island": "Torgersen", "body_mass_g": 3750, "sex": "male"}, 
+      {"species": "Adelie", "island": "Torgersen", "body_mass_g": 3800, "sex": "female"}, 
       ...
     ]
     ```
@@ -1007,35 +1025,41 @@ I claim it's possible, I don't claim it's a good idea.
 
 We have a couple of helper functions to convert to:
 
- - data frames: column-based
- - lists of lists: row-based
-
-```{r echo=FALSE}
-# start with a couple of helpers
-dpurrr_to_list <- function(.data) {
-  .data |>
-    as.list() |>
-    purrr::list_transpose(simplify = FALSE)
-}
-
-dpurrr_to_tibble <- function(.x) {
-  .x |>
-    purrr::list_transpose() |>
-    tibble::as_tibble()
-}
-```
+- lists of lists: row-based
  
-<hr>
+  ```{r}
+  #' @param .data  data frame or tibble
+  #' @return unnamed list of named lists
+  dpurrr_to_list <- function(.data) {
+    .data |>
+      as.list() |>
+      purrr::list_transpose(simplify = FALSE)
+  }
+  ```
 
-Run the code to create `dpurrr_to_list()` and `dpurrr_to_tibble()`, then experiment with:
+- data frames: column-based
 
-```r
-# try out our helpers
-mtcars |>
-  head(1) |>
+  ```{r}
+  #' @param .x  unnamed list of named lists 
+  #' @return tibble
+  dpurrr_to_tibble <- function(.x) {
+    .x |>
+      purrr::list_transpose() |>
+      tibble::as_tibble()
+  }
+  ```
+ 
+## Our turn: experiment
+
+Run the code through `dpurrr_to_list()` and `dpurrr_to_tibble()`, then experiment with:
+
+```{r}
+# experiment with helpers
+penguins_local |>
+  head(2) |>
   dpurrr_to_list() |>
-  dpurrr_to_tibble() |>
-  print()
+  # dpurrr_to_tibble() |>
+  str()
 ```
 
 Comment and change lines as you see fit.
@@ -1043,29 +1067,39 @@ Comment and change lines as you see fit.
 
 ## Our turn: dpurrr filter (first element) {auto-animate=true}
 
-```r
+```{.r code-line-numbers="1-3"}
 # filter is just purrr::keep()
-mtcars |>
+penguins_local |>
   dpurrr_to_list() |>
-  keep(\(d) d$gear == 3) |>
-  dpurrr_to_tibble() |>
-  print()
+  keep(\(d) d$sex == "female" && !is.na(d$sex)) |>
+  dpurrr_to_tibble() 
 ```
 
 Predicate function acts on each "row", `d`, which is a list:
 
 ```{r echo=FALSE}
 mtcars_list <- mtcars |> dpurrr_to_list()
+penguins_list <- penguins_local |> dpurrr_to_list()
 str_element <- \(.x, i) .x[[i]] |> str()
 ```
 
-. . .
-
 :::: {.columns}
 
-::: {.column .opacity-67 width="16%"}
+::: {.column .opacity-67 width="33%"}
 ```{r echo=FALSE}
-str_element(mtcars_list, 1)
+str_element(penguins_list, 1)
+```
+:::
+
+::: {.column .opacity-00 width="33%"}
+```{r echo=FALSE}
+str_element(penguins_list, 2)
+```
+:::
+
+::: {.column .opacity-00 width="33%"}
+```{r echo=FALSE}
+str_element(penguins_list, 3)
 ```
 :::
 
@@ -1073,52 +1107,33 @@ str_element(mtcars_list, 1)
 
 ## Our turn: dpurrr filter (more elements) {auto-animate=true}
 
-```r
+```{.r code-line-numbers="1-3"}
 # filter is just purrr::keep()
-mtcars |>
+penguins_local |>
   dpurrr_to_list() |>
-  keep(\(d) d$gear == 3) |>
-  dpurrr_to_tibble() |>
-  print()
+  keep(\(d) d$sex == "female" && !is.na(d$sex)) |>
+  dpurrr_to_tibble() 
 ```
 
 Predicate function acts on each "row", `d`, which is a list:
 
 :::: {.columns}
 
-::: {.column .opacity-67 width="16%"}
+::: {.column .opacity-67 width="33%"}
 ```{r echo=FALSE}
-str_element(mtcars_list, 1)
+str_element(penguins_list, 1)
 ```
 :::
 
-::: {.column .opacity-67 width="16%"}
+::: {.column .opacity-67 width="33%"}
 ```{r echo=FALSE}
-str_element(mtcars_list, 2)
+str_element(penguins_list, 2)
 ```
 :::
 
-::: {.column .opacity-67 width="16%"}
+::: {.column .opacity-67 width="33%"}
 ```{r echo=FALSE}
-str_element(mtcars_list, 3)
-```
-:::
-
-::: {.column .opacity-67 width="16%"}
-```{r echo=FALSE}
-str_element(mtcars_list, 4)
-```
-:::
-
-::: {.column .opacity-67 width="16%"}
-```{r echo=FALSE}
-str_element(mtcars_list, 5)
-```
-:::
-
-::: {.column .opacity-67 width="18%"}
-```{r echo=FALSE}
-str_element(mtcars_list, 6)
+str_element(penguins_list, 3)
 ```
 :::
 
@@ -1126,52 +1141,33 @@ str_element(mtcars_list, 6)
 
 ## Our turn: dpurrr filter (element results) {auto-animate=true}
 
-```r
+```{.r code-line-numbers="1-4"}
 # filter is just purrr::keep()
-mtcars |>
+penguins_local |>
   dpurrr_to_list() |>
-  keep(\(d) d$gear == 3) |>
-  dpurrr_to_tibble() |>
-  print()
+  keep(\(d) d$sex == "female" && !is.na(d$sex)) |>
+  dpurrr_to_tibble() 
 ```
 
 Predicate function acts on each "row", `d`, which is a list:
 
 :::: {.columns}
 
-::: {.column .opacity-33 width="16%"}
+::: {.column .opacity-33 width="33%"}
 ```{r echo=FALSE}
-str_element(mtcars_list, 1)
+str_element(penguins_list, 1)
 ```
 :::
 
-::: {.column .opacity-33 width="16%"}
+::: {.column width="33%"}
 ```{r echo=FALSE}
-str_element(mtcars_list, 2)
+str_element(penguins_list, 2)
 ```
 :::
 
-::: {.column .opacity-33 width="16%"}
+::: {.column width="33%"}
 ```{r echo=FALSE}
-str_element(mtcars_list, 3)
-```
-:::
-
-::: {.column width="16%"}
-```{r echo=FALSE}
-str_element(mtcars_list, 4)
-```
-:::
-
-::: {.column width="16%"}
-```{r echo=FALSE}
-str_element(mtcars_list, 5)
-```
-:::
-
-::: {.column width="18%"}
-```{r echo=FALSE}
-str_element(mtcars_list, 6)
+str_element(penguins_list, 3)
 ```
 :::
 
@@ -1180,24 +1176,22 @@ str_element(mtcars_list, 6)
 
 ## Our turn: dpurrr filter (result) {auto-animate=true}
 
-```r
+```{.r code-line-numbers="1-5"}
 # filter is just purrr::keep()
-mtcars |>
+penguins_local |>
   dpurrr_to_list() |>
-  keep(\(d) d$gear == 3) |>
-  dpurrr_to_tibble() |>
-  print()
+  keep(\(d) d$sex == "female" && !is.na(d$sex)) |>
+  dpurrr_to_tibble() 
 ```
 
 Re-assembled into a tibble:
 
 ```{r echo=FALSE}
 # filter is just purrr::keep()
-mtcars |>
+penguins_local |>
   dpurrr_to_list() |>
-  keep(\(d) d$gear == 3) |>
-  dpurrr_to_tibble() |>
-  print()
+  keep(\(d) d$sex == "female" && !is.na(d$sex)) |>
+  dpurrr_to_tibble() 
 ```
 
 
