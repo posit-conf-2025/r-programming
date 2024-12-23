@@ -1027,20 +1027,22 @@ We have a couple of helper functions to convert to:
 - Data frames: column-based
 
   ```{r}
-  #' @param .x  unnamed list of named lists 
+  #' @param .d unnamed list of named lists, i.e. transposed data frame
+  #'
   #' @return tibble
-  dpurrr_to_tibble <- function(.x) {
-    .x |>
+  dpurrr_to_tibble <- function(.d) {
+    .d |>
       purrr::list_transpose() |>
       tibble::as_tibble()
-  }
+  }  
   ```
 
 - Lists of lists: row-based
  
   ```{r}
-  #' @param .data  data frame or tibble
-  #' @return unnamed list of named lists
+  #' @param .data data frame or tibble
+  #'
+  #' @return unnamed list of named lists, i.e. transposed data frame
   dpurrr_to_list <- function(.data) {
     .data |>
       as.list() |>
@@ -1048,7 +1050,7 @@ We have a couple of helper functions to convert to:
   }
   ```
  
-## Our turn: experiment
+## Our turn: Experiment
 
 ```{r}
 # experiment with helpers
@@ -1194,8 +1196,13 @@ penguins_local |>
 ## Our turn: dpurrr mutate {auto-animate=true}
 
 ```{r}
-dpurrr_mutate <- function(.x, mapper) {
-  .x |> purrr::map(\(d) modifyList(d, mapper(d)))
+#' @param .d unnamed list of named lists, i.e. transposed data frame
+#' @param mapper function applied to each member of `.d`
+#' 
+#' @return unnamed list of named lists, i.e. transposed data frame
+dpurrr_mutate <- function(.d, mapper) {
+  # modifyList() used to keep current elements
+  .d |> purrr::map(\(d) modifyList(d, mapper(d)))
 }
 ```
 
