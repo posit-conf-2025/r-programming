@@ -1609,8 +1609,8 @@ indent(str_element(penguins_list_split$Adelie, 2))
 :::: {.column width="31%" .opacity-67 .margin-4}
 ::: {.padding-4}
 ```{r echo=FALSE}
-indent(str_element(penguins_list_split$Chinstrap, 1))
-indent(str_element(penguins_list_split$Chinstrap, 2))
+indent(str_element(penguins_list_split$Gentoo, 1))
+indent(str_element(penguins_list_split$Gentoo, 2))
 ```
 :::
 ::::
@@ -1618,8 +1618,8 @@ indent(str_element(penguins_list_split$Chinstrap, 2))
 :::: {.column width="32%" .opacity-67 .margin-4}
 ::: {.padding-4}
 ```{r echo=FALSE}
-indent(str_element(penguins_list_split$Gentoo, 1))
-indent(str_element(penguins_list_split$Gentoo, 2))
+indent(str_element(penguins_list_split$Chinstrap, 1))
+indent(str_element(penguins_list_split$Chinstrap, 2))
 ```
 :::
 ::::
@@ -1657,18 +1657,6 @@ indent(str_element(penguins_list_split$Adelie, 2))
 
 :::: {.column width="31%" .opacity-67 .margin-4}
 ```{r echo=FALSE}
-cat("$Chinstrap")
-```
-::: {.border .padding-4}
-```{r echo=FALSE}
-indent(str_element(penguins_list_split$Chinstrap, 1))
-indent(str_element(penguins_list_split$Chinstrap, 2))
-```
-:::
-::::
-
-:::: {.column width="32%" .opacity-67 .margin-4}
-```{r echo=FALSE}
 cat("$Gentoo")
 ```
 ::: {.border .padding-4}
@@ -1679,26 +1667,194 @@ indent(str_element(penguins_list_split$Gentoo, 2))
 :::
 ::::
 
+:::: {.column width="32%" .opacity-67 .margin-4}
+```{r echo=FALSE}
+cat("$Chinstrap")
+```
+::: {.border .padding-4}
+```{r echo=FALSE}
+indent(str_element(penguins_list_split$Chinstrap, 1))
+indent(str_element(penguins_list_split$Chinstrap, 2))
+```
+:::
+::::
+
 :::::
 
-## With grouping
+## Our turn: dpurrr summarise with grouping (summarise) {auto-animate=true}
 
-First, a little prep work:
-
-```{r}
-ireduce <- function(x, reducer, .init) {
-  purrr::reduce2(x, names(x), reducer, .init = .init)
-}
-
-summariser <- purrr::partial(
-  dpurrr_summarise,
-  reducer = \(acc, val) list(
-    wt_min = min(acc$wt_min, val$wt), 
-    wt_max = max(acc$wt_max, val$wt)
-  ),
-  .init = list(wt_min = Inf, wt_max = -Inf)
-)
+```{.r code-line-numbers="1-4,7"}
+penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_split("species") |>
+  map(\(d) d |> dpurrr_summarise(body_mass_g_min_max)) |>
+  dpurrr_combine("species") |>
+  dpurrr_to_tibble() |>
+  print()
 ```
+
+<hr>
+
+```{r echo=FALSE}
+penguins_list_summarise <-
+  penguins_list_split |>
+  map(\(d) d |> dpurrr_summarise(body_mass_g_min_max))
+```
+
+::::: {.columns width="100%" .padding-4 .height-auto .display-flex}
+
+:::: {.column width="32%" .opacity-67 .margin-4}
+```{r echo=FALSE}
+cat("$Adelie")
+```
+::: {.border .padding-4}
+```{r echo=FALSE}
+indent(str_element(penguins_list_summarise$Adelie, 1))
+```
+:::
+::::
+
+:::: {.column width="31%" .opacity-67 .margin-4}
+```{r echo=FALSE}
+cat("$Gentoo")
+```
+::: {.border .padding-4}
+```{r echo=FALSE}
+indent(str_element(penguins_list_summarise$Gentoo, 1))
+```
+:::
+::::
+
+:::: {.column width="32%" .opacity-67 .margin-4}
+```{r echo=FALSE}
+cat("$Chinstrap")
+```
+::: {.border .padding-4}
+```{r echo=FALSE}
+indent(str_element(penguins_list_summarise$Chinstrap, 1))
+```
+:::
+::::
+
+:::::
+
+## Our turn: dpurrr summarise with grouping (combine 🌗) {auto-animate=true}
+
+```{.r code-line-numbers="1-5,7"}
+penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_split("species") |>
+  map(\(d) d |> dpurrr_summarise(body_mass_g_min_max)) |>
+  dpurrr_combine("species") |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+<hr>
+
+```{r echo=FALSE}
+penguins_list_combine <-
+  penguins_list_summarise |>
+  dpurrr_combine("species")
+```
+
+::::: {.columns width="100%" .padding-4 .height-auto .display-flex}
+
+:::: {.column width="32%" .opacity-67 .margin-4}
+```{r echo=FALSE}
+cat("$Adelie")
+```
+::: {.border .padding-4}
+```{r echo=FALSE}
+indent(str_element(penguins_list_combine, 1))
+```
+:::
+::::
+
+:::: {.column width="31%" .opacity-67 .margin-4}
+```{r echo=FALSE}
+cat("$Gentoo")
+```
+::: {.border .padding-4}
+```{r echo=FALSE}
+indent(str_element(penguins_list_combine, 2))
+```
+:::
+::::
+
+:::: {.column width="32%" .opacity-67 .margin-4}
+```{r echo=FALSE}
+cat("$Chinstrap")
+```
+::: {.border .padding-4}
+```{r echo=FALSE}
+indent(str_element(penguins_list_combine, 3))
+```
+:::
+::::
+
+:::::
+
+## Our turn: dpurrr summarise with grouping (combine 🌕) {auto-animate=true}
+
+```{.r code-line-numbers="1-5,7"}
+penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_split("species") |>
+  map(\(d) d |> dpurrr_summarise(body_mass_g_min_max)) |>
+  dpurrr_combine("species") |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+<hr>
+
+::::: {.columns .border width="100%" .padding-4 .height-auto .display-flex}
+
+:::: {.column width="32%" .opacity-67 .margin-4}
+::: {.padding-4}
+```{r echo=FALSE}
+indent(str_element(penguins_list_combine, 1))
+```
+:::
+::::
+
+:::: {.column width="31%" .opacity-67 .margin-4}
+::: {.padding-4}
+```{r echo=FALSE}
+indent(str_element(penguins_list_combine, 2))
+```
+:::
+::::
+
+:::: {.column width="32%" .opacity-67 .margin-4}
+::: {.padding-4}
+```{r echo=FALSE}
+indent(str_element(penguins_list_combine, 3))
+```
+:::
+::::
+
+:::::
+
+## Our turn: dpurrr summarise with grouping (result) {auto-animate=true}
+
+```{.r code-line-numbers="1-7"}
+penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_split("species") |>
+  map(\(d) d |> dpurrr_summarise(body_mass_g_min_max)) |>
+  dpurrr_combine("species") |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+<hr>
+
+```{r echo=FALSE}
+penguins_list_combine |> dpurrr_to_tibble()
+```
+
 
 ## Et voilà
 
@@ -1724,12 +1880,12 @@ In JavaScript, data frames are often arrays of objects (lists), so you'll see fo
 
 ::: incremental
 - {here} can help you manage file paths within projects.
-- Functional programming:
-    - has three fundamental paradigms:
+- Functional programming has three fundamental paradigms:
       - filter (`purrr::keep()`), map, reduce
-      - {purrr} offers variants and adverbs
+- {purrr} offers variants and adverbs.
 - Adverbs can help you handle failure.
 - Functions can be used as arguments to functions.
+- Functions can be returned functions.
 - Another view of data frames (if we had time).
 :::
 
