@@ -25,3 +25,25 @@ code.sourceCode {
 .opacity-67 {
   opacity: 67%;
 }
+
+.border {
+  border: solid #777;
+  border-radius: 8px;
+}
+
+.margin-4 {
+  margin: 4px;
+}
+
+.padding-4 {
+  padding: 4px;
+}
+
+.height-auto {
+  height: auto;
+}
+
+.display-flex {
+  // ovverride quarto's use of 'display: initial;' for div.columns
+  display: flex !important; 
+}

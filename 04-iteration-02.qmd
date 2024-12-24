@@ -1076,7 +1076,6 @@ penguins_local |>
 Predicate function acts on each "row", `d`, which is a list:
 
 ```{r echo=FALSE}
-mtcars_list <- mtcars |> dpurrr_to_list()
 penguins_list <- penguins_local |> dpurrr_to_list()
 str_element <- \(.x, i) .x[[i]] |> str()
 ```
@@ -1570,7 +1569,7 @@ penguins_local |>
 penguins_local
 ```
 
-## Our turn: dpurrr summarise with grouping (by row, before) {auto-animate=true}
+## Our turn: dpurrr summarise with grouping (by row) {auto-animate=true}
 
 ```{.r code-line-numbers="1-2,7"}
 penguins_local |>
@@ -1584,27 +1583,99 @@ penguins_local |>
 
 <hr>
 
-:::: {.columns}
-
-::: {.column .opacity-67 width="33%"}
 ```{r echo=FALSE}
-str_element(penguins_list, 1)
+# function to write indented output
+indent <- function(...) {
+  # thanks: https://stackoverflow.com/a/42542382
+  writeLines(paste("  ", capture.output(...), sep=""))
+}
+
+penguins_list_split <-
+  penguins_list |>
+  dpurrr_split("species")
+```
+
+::::: {.columns width="100%" .border .padding-4 .height-auto .display-flex}
+
+::: {.column width="32%" .opacity-67 .margin-4 .padding-4}
+```{r echo=FALSE}
+cat(" ")
+```
+```{r echo=FALSE}
+indent(str_element(penguins_list_split$Adelie, 1))
+indent(str_element(penguins_list_split$Adelie, 2))
 ```
 :::
 
-::: {.column .opacity-67 width="33%"}
+::: {.column width="31%" .opacity-67 .margin-4 .padding-4}
 ```{r echo=FALSE}
-str_element(penguins_list, 2)
+cat(" ")
+```
+```{r echo=FALSE}
+indent(str_element(penguins_list_split$Chinstrap, 1))
+indent(str_element(penguins_list_split$Chinstrap, 2))
 ```
 :::
 
-::: {.column .opacity-67 width="33%"}
+::: {.column width="32%" .opacity-67 .margin-4 .padding-4}
 ```{r echo=FALSE}
-str_element(penguins_list, 3)
+cat(" ")
+```
+```{r echo=FALSE}
+indent(str_element(penguins_list_split$Gentoo, 1))
+indent(str_element(penguins_list_split$Gentoo, 2))
 ```
 :::
 
-::::
+:::::
+
+## Our turn: dpurrr summarise with grouping (split) {auto-animate=true}
+
+```{.r code-line-numbers="1-3,7"}
+penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_split("species") |>
+  map(\(d) d |> dpurrr_summarise(body_mass_g_min_max)) |>
+  dpurrr_combine("species") |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+<hr>
+
+::::: {.columns width="100%" .padding-4 .height-auto .display-flex}
+
+::: {.column width="32%" .opacity-67 .border .margin-4 .padding-4}
+```{r echo=FALSE}
+cat("$Adelie")
+```
+```{r echo=FALSE}
+indent(str_element(penguins_list_split$Adelie, 1))
+indent(str_element(penguins_list_split$Adelie, 2))
+```
+:::
+
+::: {.column width="31%" .opacity-67 .border .margin-4 .padding-4}
+```{r echo=FALSE}
+cat("$Chinstrap")
+```
+```{r echo=FALSE}
+indent(str_element(penguins_list_split$Chinstrap, 1))
+indent(str_element(penguins_list_split$Chinstrap, 2))
+```
+:::
+
+::: {.column width="32%" .opacity-67 .border .margin-4 .padding-4}
+```{r echo=FALSE}
+cat("$Gentoo")
+```
+```{r echo=FALSE}
+indent(str_element(penguins_list_split$Gentoo, 1))
+indent(str_element(penguins_list_split$Gentoo, 2))
+```
+:::
+
+:::::
 
 ## With grouping
 
