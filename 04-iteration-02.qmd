@@ -1597,35 +1597,33 @@ penguins_list_split <-
 
 ::::: {.columns width="100%" .border .padding-4 .height-auto .display-flex}
 
-::: {.column width="32%" .opacity-67 .margin-4 .padding-4}
-```{r echo=FALSE}
-cat(" ")
-```
+:::: {.column width="32%" .opacity-67 .margin-4}
+::: {.padding-4}
 ```{r echo=FALSE}
 indent(str_element(penguins_list_split$Adelie, 1))
 indent(str_element(penguins_list_split$Adelie, 2))
 ```
 :::
+::::
 
-::: {.column width="31%" .opacity-67 .margin-4 .padding-4}
-```{r echo=FALSE}
-cat(" ")
-```
+:::: {.column width="31%" .opacity-67 .margin-4}
+::: {.padding-4}
 ```{r echo=FALSE}
 indent(str_element(penguins_list_split$Chinstrap, 1))
 indent(str_element(penguins_list_split$Chinstrap, 2))
 ```
 :::
+::::
 
-::: {.column width="32%" .opacity-67 .margin-4 .padding-4}
-```{r echo=FALSE}
-cat(" ")
-```
+:::: {.column width="32%" .opacity-67 .margin-4}
+::: {.padding-4}
 ```{r echo=FALSE}
 indent(str_element(penguins_list_split$Gentoo, 1))
 indent(str_element(penguins_list_split$Gentoo, 2))
 ```
 :::
+::::
+
 
 :::::
 
@@ -1645,35 +1643,41 @@ penguins_local |>
 
 ::::: {.columns width="100%" .padding-4 .height-auto .display-flex}
 
-::: {.column width="32%" .opacity-67 .border .margin-4 .padding-4}
+:::: {.column width="32%" .opacity-67 .margin-4}
 ```{r echo=FALSE}
 cat("$Adelie")
 ```
+::: {.border .padding-4}
 ```{r echo=FALSE}
 indent(str_element(penguins_list_split$Adelie, 1))
 indent(str_element(penguins_list_split$Adelie, 2))
 ```
 :::
+::::
 
-::: {.column width="31%" .opacity-67 .border .margin-4 .padding-4}
+:::: {.column width="31%" .opacity-67 .margin-4}
 ```{r echo=FALSE}
 cat("$Chinstrap")
 ```
+::: {.border .padding-4}
 ```{r echo=FALSE}
 indent(str_element(penguins_list_split$Chinstrap, 1))
 indent(str_element(penguins_list_split$Chinstrap, 2))
 ```
 :::
+::::
 
-::: {.column width="32%" .opacity-67 .border .margin-4 .padding-4}
+:::: {.column width="32%" .opacity-67 .margin-4}
 ```{r echo=FALSE}
 cat("$Gentoo")
 ```
+::: {.border .padding-4}
 ```{r echo=FALSE}
 indent(str_element(penguins_list_split$Gentoo, 1))
 indent(str_element(penguins_list_split$Gentoo, 2))
 ```
 :::
+::::
 
 :::::
 
