@@ -1703,7 +1703,7 @@ penguins_list_summarise <-
 
 ::::: {.columns width="100%" .padding-4 .height-auto .display-flex}
 
-:::: {.column width="32%" .opacity-67 .margin-4}
+:::: {.column width="32%" .margin-4}
 ```{r echo=FALSE}
 cat("$Adelie")
 ```
@@ -1714,7 +1714,7 @@ indent(str_element(penguins_list_summarise$Adelie, 1))
 :::
 ::::
 
-:::: {.column width="31%" .opacity-67 .margin-4}
+:::: {.column width="31%" .margin-4}
 ```{r echo=FALSE}
 cat("$Gentoo")
 ```
@@ -1725,7 +1725,7 @@ indent(str_element(penguins_list_summarise$Gentoo, 1))
 :::
 ::::
 
-:::: {.column width="32%" .opacity-67 .margin-4}
+:::: {.column width="32%" .margin-4}
 ```{r echo=FALSE}
 cat("$Chinstrap")
 ```
@@ -1760,7 +1760,7 @@ penguins_list_combine <-
 
 ::::: {.columns width="100%" .padding-4 .height-auto .display-flex}
 
-:::: {.column width="32%" .opacity-67 .margin-4}
+:::: {.column width="32%" .margin-4}
 ```{r echo=FALSE}
 cat("$Adelie")
 ```
@@ -1771,7 +1771,7 @@ indent(str_element(penguins_list_combine, 1))
 :::
 ::::
 
-:::: {.column width="31%" .opacity-67 .margin-4}
+:::: {.column width="31%" .margin-4}
 ```{r echo=FALSE}
 cat("$Gentoo")
 ```
@@ -1782,7 +1782,7 @@ indent(str_element(penguins_list_combine, 2))
 :::
 ::::
 
-:::: {.column width="32%" .opacity-67 .margin-4}
+:::: {.column width="32%" .margin-4}
 ```{r echo=FALSE}
 cat("$Chinstrap")
 ```
@@ -1811,7 +1811,7 @@ penguins_local |>
 
 ::::: {.columns .border width="100%" .padding-4 .height-auto .display-flex}
 
-:::: {.column width="32%" .opacity-67 .margin-4}
+:::: {.column width="32%" .margin-4}
 ::: {.padding-4}
 ```{r echo=FALSE}
 indent(str_element(penguins_list_combine, 1))
@@ -1819,7 +1819,7 @@ indent(str_element(penguins_list_combine, 1))
 :::
 ::::
 
-:::: {.column width="31%" .opacity-67 .margin-4}
+:::: {.column width="31%" .margin-4}
 ::: {.padding-4}
 ```{r echo=FALSE}
 indent(str_element(penguins_list_combine, 2))
@@ -1827,7 +1827,7 @@ indent(str_element(penguins_list_combine, 2))
 :::
 ::::
 
-:::: {.column width="32%" .opacity-67 .margin-4}
+:::: {.column width="32%" .margin-4}
 ::: {.padding-4}
 ```{r echo=FALSE}
 indent(str_element(penguins_list_combine, 3))
@@ -1856,32 +1856,22 @@ penguins_list_combine |> dpurrr_to_tibble()
 ```
 
 
-## Et voilà
-
-```{.r}
-mtcars |> 
-  split(mtcars$gear) |>
-  purrr::map(summariser) |> 
-  ireduce( 
-    reducer = \(acc, x, y) rbind(acc, c(list(gear = y), x)),
-    .init = data.frame()
-  ) 
-```
-
-. . .
+## Our turn: Finally...
 
 We can agree this presents no danger to dplyr.
 
 . . .
 
-In JavaScript, data frames are often arrays of objects (lists), so you'll see formulations like this (e.g. **tidyjs**).
+In JavaScript, data frames are often arrays of objects (lists); you can use tools like [**tidyjs**](https://observablehq.com/@pbeshai/tidy-js-intro-demo?collection=@pbeshai/tidy-js):
+
+![](images/tidyjs.png){width=70% fig-align="center" fig-alt="Screenshot of tidyjs Observable page"}
 
 ## Summary
 
 ::: incremental
 - {here} can help you manage file paths within projects.
 - Functional programming has three fundamental paradigms:
-      - filter (`purrr::keep()`), map, reduce
+  - filter (`purrr::keep()`), map, reduce
 - {purrr} offers variants and adverbs.
 - Adverbs can help you handle failure.
 - Functions can be used as arguments to functions.
