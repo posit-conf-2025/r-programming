@@ -808,7 +808,7 @@ possibly_read_excel <- possibly() # we do the rest
 
 Use this function in your script.
 
-## Our Turn: re-implement `list_rbind()`
+## Our turn: Re-implement `list_rbind()`
 
 Re-implement `list_rbind()` using functional-programming techniques:
 
@@ -948,7 +948,7 @@ To me, this is a cleaner solution than mutating the data from decimal to percent
 
 ## If we have time
 
-Three fundamental operations in functional programming
+Three fundamental paradigms in functional programming
 
 Given a list and a function:
 
@@ -969,26 +969,43 @@ For coding, we will use `r-programming-exercises`:
 
 ## dplyr using purrr?
 
-We can use `map()`, `filter()`, `reduce()` to "implement", using purrr:
+We can use `purrr::keep()`, `purrr::map()`, `purrr::reduce()` to "implement":
 
--   `dplyr::mutate()`
 -   `dplyr::filter()`
+-   `dplyr::mutate()`
 -   `dplyr::summarise()`
 
 . . .
 
 I claim it's possible, I don't claim it's a good idea.
 
-## Tabular data: two perspectives
+## Our turn: Simplified penguins
+
+```{r}
+library("conflicted")
+library("palmerpenguins")
+library("dplyr")
+library("purrr")
+
+# simplify penguins (Sorry Allison!)
+penguins_local <-
+  penguins |>
+  mutate(across(where(is.factor), as.character)) |> # use strings, not factors
+  select(species, island, body_mass_g, sex) |>      # fewer columns
+  print()
+```
+
+## Tabular data: Two perspectives
 
 ::: incremental
 -   column-based: named list of column vectors
 
     ``` json
     {
-      mpg: [21.0, 22.8, ...],
-      cyl: [6, 4, ...],
-      ...
+      "species": ["Adelie", "Adelie", ...],
+      "island": ["Torgersen", "Torgersen", ...],
+      "body_mass_g": [3750, 3800, ...],
+      "sex": ["male", "female", ...]
     }
     ```
 
@@ -996,133 +1013,869 @@ I claim it's possible, I don't claim it's a good idea.
 
     ``` json
     [
-      {mpg: 21.0, cyl: 6, ...}, 
-      {mpg: 22.8, cyl: 4, ...}, 
+      {"species": "Adelie", "island": "Torgersen", "body_mass_g": 3750, "sex": "male"}, 
+      {"species": "Adelie", "island": "Torgersen", "body_mass_g": 3800, "sex": "female"}, 
       ...
     ]
     ```
 :::
 
-## `dpurrr_filter()`
+## Our turn: Helper functions
+
+We have a couple of helper functions to convert to:
+
+- Data frames: column-based
+
+  ```{r}
+  #' @param .d unnamed list of named lists, i.e. transposed data frame
+  #'
+  #' @return tibble
+  dpurrr_to_tibble <- function(.d) {
+    .d |>
+      purrr::list_transpose() |>
+      tibble::as_tibble()
+  }  
+  ```
+
+- Lists of lists: row-based
+ 
+  ```{r}
+  #' @param .data data frame or tibble
+  #'
+  #' @return unnamed list of named lists, i.e. transposed data frame
+  dpurrr_to_list <- function(.data) {
+    .data |>
+      as.list() |>
+      purrr::list_transpose(simplify = FALSE)
+  }
+  ```
+ 
+## Our turn: Experiment
 
 ```{r}
-dpurrr_filter <- function(df, predicate) {
-  df |>
-    as.list() |>
-    purrr::list_transpose(simplify = FALSE) |>
-    purrr::keep(predicate) |>
-    purrr::list_transpose() |>
-    as.data.frame() 
+# experiment with helpers
+penguins_local |>
+  head(2) |>
+  dpurrr_to_list() |>
+  # dpurrr_to_tibble() |>
+  str()
+```
+
+Comment and change lines as you see fit.
+
+## Our turn: dpurrr filter (first element) {auto-animate=true}
+
+```{.r code-line-numbers="1-3"}
+# filter is just purrr::keep()
+penguins_local |>
+  dpurrr_to_list() |>
+  keep(\(d) d$sex == "female" && !is.na(d$sex)) |>
+  dpurrr_to_tibble() 
+```
+
+Predicate function acts on each "row", `d`, which is a list:
+
+```{r echo=FALSE}
+penguins_list <- penguins_local |> dpurrr_to_list()
+str_element <- \(.x, i) .x[[i]] |> str()
+```
+
+:::: {.columns}
+
+::: {.column .opacity-67 width="33%"}
+```{r echo=FALSE}
+str_element(penguins_list, 1)
+```
+:::
+
+::: {.column .opacity-00 width="33%"}
+```{r echo=FALSE}
+str_element(penguins_list, 2)
+```
+:::
+
+::: {.column .opacity-00 width="33%"}
+```{r echo=FALSE}
+str_element(penguins_list, 3)
+```
+:::
+
+::::
+
+## Our turn: dpurrr filter (more elements) {auto-animate=true}
+
+```{.r code-line-numbers="1-3"}
+# filter is just purrr::keep()
+penguins_local |>
+  dpurrr_to_list() |>
+  keep(\(d) d$sex == "female" && !is.na(d$sex)) |>
+  dpurrr_to_tibble() 
+```
+
+Predicate function acts on each "row", `d`, which is a list:
+
+:::: {.columns}
+
+::: {.column .opacity-67 width="33%"}
+```{r echo=FALSE}
+str_element(penguins_list, 1)
+```
+:::
+
+::: {.column .opacity-67 width="33%"}
+```{r echo=FALSE}
+str_element(penguins_list, 2)
+```
+:::
+
+::: {.column .opacity-67 width="33%"}
+```{r echo=FALSE}
+str_element(penguins_list, 3)
+```
+:::
+
+::::
+
+## Our turn: dpurrr filter (element results) {auto-animate=true}
+
+```{.r code-line-numbers="1-4"}
+# filter is just purrr::keep()
+penguins_local |>
+  dpurrr_to_list() |>
+  keep(\(d) d$sex == "female" && !is.na(d$sex)) |>
+  dpurrr_to_tibble() 
+```
+
+Predicate function acts on each "row", `d`, which is a list:
+
+:::: {.columns}
+
+::: {.column .opacity-33 width="33%"}
+```{r echo=FALSE}
+str_element(penguins_list, 1)
+```
+:::
+
+::: {.column width="33%"}
+```{r echo=FALSE}
+str_element(penguins_list, 2)
+```
+:::
+
+::: {.column width="33%"}
+```{r echo=FALSE}
+str_element(penguins_list, 3)
+```
+:::
+
+::::
+
+
+## Our turn: dpurrr filter (result) {auto-animate=true}
+
+```{.r code-line-numbers="1-5"}
+# filter is just purrr::keep()
+penguins_local |>
+  dpurrr_to_list() |>
+  keep(\(d) d$sex == "female" && !is.na(d$sex)) |>
+  dpurrr_to_tibble() 
+```
+
+Re-assembled into a tibble:
+
+```{r echo=FALSE}
+# filter is just purrr::keep()
+penguins_local |>
+  dpurrr_to_list() |>
+  keep(\(d) d$sex == "female" && !is.na(d$sex)) |>
+  dpurrr_to_tibble() 
+```
+
+
+## Our turn: dpurrr mutate {auto-animate=true}
+
+```{r}
+#' @param .d unnamed list of named lists, i.e. transposed data frame
+#' @param mapper function applied to each member of `.d`
+#' 
+#' @return unnamed list of named lists, i.e. transposed data frame
+dpurrr_mutate <- function(.d, mapper) {
+  # modifyList() used to keep current elements
+  .d |> purrr::map(\(d) modifyList(d, mapper(d)))
 }
 ```
 
-. . .
+This version of mutate operates on every "row", modifying its list.
+
+```r
+penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_mutate(\(d) list(body_mass_kg = d$body_mass_g / 1000)) |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+## Our turn: dpurrr mutate (start) {auto-animate=true}
+
+```{.r code-line-numbers="1-1"}
+penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_mutate(\(d) list(body_mass_kg = d$body_mass_g / 1000)) |>
+  dpurrr_to_tibble()
+```
 
 <hr>
 
-```{r}
-dpurrr_filter(mtcars, \(d) d$gear == 3) |> head()
+```{r echo=FALSE}
+penguins_local
 ```
 
-## `dpurrr_mutate()`
+## Our turn: dpurrr mutate (by row, before) {auto-animate=true}
+
+```{.r code-line-numbers="1-2"}
+penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_mutate(\(d) list(body_mass_kg = d$body_mass_g / 1000)) |>
+  dpurrr_to_tibble()
+```
+
+<hr>
+
+:::: {.columns}
+
+::: {.column .opacity-67 width="33%"}
+```{r echo=FALSE}
+str_element(penguins_list, 1)
+```
+:::
+
+::: {.column .opacity-67 width="33%"}
+```{r echo=FALSE}
+str_element(penguins_list, 2)
+```
+:::
+
+::: {.column .opacity-67 width="33%"}
+```{r echo=FALSE}
+str_element(penguins_list, 3)
+```
+:::
+
+::::
+
+## Our turn: dpurrr mutate (by row, after) {auto-animate=true auto-animate-unmatched=false}
+
+```{.r code-line-numbers="1-3"}
+penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_mutate(\(d) list(body_mass_kg = d$body_mass_g / 1000)) |>
+  dpurrr_to_tibble()
+```
+
+<hr>
+
+```{r echo=FALSE}
+penguins_mutate_list <- 
+  penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_mutate(\(d) list(body_mass_kg = d$body_mass_g / 1000)) 
+```
+
+:::: {.columns}
+
+::: {.column width="33%"}
+```{r echo=FALSE}
+str_element(penguins_mutate_list, 1)
+```
+:::
+
+::: {.column width="33%"}
+```{r echo=FALSE}
+str_element(penguins_mutate_list, 2)
+```
+:::
+
+::: {.column width="33%"}
+```{r echo=FALSE}
+str_element(penguins_mutate_list, 3)
+```
+:::
+
+::::
+
+## Our turn: dpurrr mutate (result) {auto-animate=true}
+
+```{.r code-line-numbers="1-4"}
+penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_mutate(\(d) list(body_mass_kg = d$body_mass_g / 1000)) |>
+  dpurrr_to_tibble()
+```
+
+<hr>
+
+```{r echo=FALSE}
+penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_mutate(\(d) list(body_mass_kg = d$body_mass_g / 1000)) |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+## Our turn: dpurrr summarise
 
 ```{r}
-dpurrr_mutate <- function(df, mapper) {
-  df |>
-    as.list() |>
-    purrr::list_transpose(simplify = FALSE) |>
-    purrr::map(\(d) c(d, mapper(d))) |>
-    purrr::list_transpose() |>
-    as.data.frame() 
+#' @param .d unnamed list of named lists, i.e. transposed data frame
+#' @param reducer function applied accumulator and to each member of `.d`
+#' @param .init initial value of accumulator, if empty: first element of `.d`
+#' @param ... other arguments passed to `purrr::reduce()`
+#'
+#' @return unnamed list of named lists, i.e. transposed data frame
+dpurrr_summarise <- function(.d, reducer, .init, ...) {
+  # wrap result in a list, to return a transposed data frame
+  .d |> purrr::reduce(reducer, .init = .init, ...) |> list()
 }
 ```
 
-. . .
+Takes a transposed data frame, returns a transposed data frame with a single "row".
 
-<hr>
-
-```{r}
-mtcars |> 
-  dpurrr_mutate(\(d) list(wt_kg = d$wt * 1000 / 2.2)) |> 
-  head()
-```
-
-## `dpurrr_summarise()`
-
-```{r}
-dpurrr_summarise <- function(df, reducer, .init) {
-  df |>
-    as.list() |>
-    purrr::list_transpose(simplify = FALSE) |>
-    purrr::reduce(reducer, .init = .init) |>
-    as.data.frame()
-}
-```
-
-. . .
-
-<hr>
-
-```{r}
-mtcars |> 
+```r
+penguins_local |>
+  dpurrr_to_list() |>
   dpurrr_summarise(
-    reducer = \(acc, val) list(
-      wt_min = min(acc$wt_min, val$wt), 
-      wt_max = max(acc$wt_max, val$wt)
-    ),
-    .init = list(wt_min = Inf, wt_max = -Inf)
+    \(acc, d) list(
+      body_mass_g_min = min(acc$body_mass_g_min, d$body_mass_g, na.rm = TRUE),
+      body_mass_g_max = max(acc$body_mass_g_max, d$body_mass_g, na.rm = TRUE)
+    )
+  ) |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+## Our turn: dpurrr summarise (start) {auto-animate=true}
+
+```{.r code-line-numbers="1-1,10"}
+penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_summarise(
+    \(acc, d) list(
+      body_mass_g_min = min(acc$body_mass_g_min, d$body_mass_g, na.rm = TRUE),
+      body_mass_g_max = max(acc$body_mass_g_max, d$body_mass_g, na.rm = TRUE)
+    )
+  ) |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+<hr>
+
+```{r echo=FALSE}
+penguins_local
+```
+
+## Our turn: dpurrr summarise (by row, before) {auto-animate=true}
+
+```{.r code-line-numbers="1-2,10"}
+penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_summarise(
+    \(acc, d) list(
+      body_mass_g_min = min(acc$body_mass_g_min, d$body_mass_g, na.rm = TRUE),
+      body_mass_g_max = max(acc$body_mass_g_max, d$body_mass_g, na.rm = TRUE)
+    )
+  ) |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+<hr>
+
+:::: {.columns}
+
+::: {.column .opacity-67 width="33%"}
+```{r echo=FALSE}
+str_element(penguins_list, 1)
+```
+:::
+
+::: {.column .opacity-67 width="33%"}
+```{r echo=FALSE}
+str_element(penguins_list, 2)
+```
+:::
+
+::: {.column .opacity-67 width="33%"}
+```{r echo=FALSE}
+str_element(penguins_list, 3)
+```
+:::
+
+::::
+
+
+## Our turn: dpurrr summarise (by row, after) {auto-animate=true}
+
+```{.r code-line-numbers="1-8,10"}
+penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_summarise(
+    \(acc, d) list(
+      body_mass_g_min = min(acc$body_mass_g_min, d$body_mass_g, na.rm = TRUE),
+      body_mass_g_max = max(acc$body_mass_g_max, d$body_mass_g, na.rm = TRUE)
+    )
+  ) |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+<hr>
+
+```{r echo=FALSE}
+penguins_summarise_list <- 
+  penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_summarise(
+    \(acc, d) list(
+      body_mass_g_min = min(acc$body_mass_g_min, d$body_mass_g, na.rm = TRUE),
+      body_mass_g_max = max(acc$body_mass_g_max, d$body_mass_g, na.rm = TRUE)
+    )
   )
 ```
 
-## With grouping
-
-First, a little prep work:
-
-```{r}
-ireduce <- function(x, reducer, .init) {
-  purrr::reduce2(x, names(x), reducer, .init = .init)
-}
-
-summariser <- purrr::partial(
-  dpurrr_summarise,
-  reducer = \(acc, val) list(
-    wt_min = min(acc$wt_min, val$wt), 
-    wt_max = max(acc$wt_max, val$wt)
-  ),
-  .init = list(wt_min = Inf, wt_max = -Inf)
-)
+```{r echo=FALSE}
+str_element(penguins_summarise_list, 1)
 ```
 
-## Et voilà
+## Our turn: dpurrr summarise (result) {auto-animate=true}
 
-```{r}
-mtcars |> 
-  split(mtcars$gear) |>
-  purrr::map(summariser) |> 
-  ireduce( 
-    reducer = \(acc, x, y) rbind(acc, c(list(gear = y), x)),
-    .init = data.frame()
-  ) 
+```{.r code-line-numbers="1-10"}
+penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_summarise(
+    \(acc, d) list(
+      body_mass_g_min = min(acc$body_mass_g_min, d$body_mass_g, na.rm = TRUE),
+      body_mass_g_max = max(acc$body_mass_g_max, d$body_mass_g, na.rm = TRUE)
+    )
+  ) |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+<hr>
+
+```{r echo=FALSE}
+penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_summarise(
+    \(acc, d) list(
+      body_mass_g_min = min(acc$body_mass_g_min, d$body_mass_g, na.rm = TRUE),
+      body_mass_g_max = max(acc$body_mass_g_max, d$body_mass_g, na.rm = TRUE)
+    )
+  ) |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+## Our turn: dpurrr summarise with grouping
+
+We need a couple more functions to split and combine, also for our reducer:
+
+```r
+#' @param .d unnamed list of named lists, i.e. transposed data frame
+#' @param name string, name of variable on which to split
+#'
+#' @return named list of transposed data frames, names: values of split variable
+dpurrr_split <- function(.d, name) {
+  # uses purrr::map(), purrr::set_names(), purrr::keep()
+}
 ```
 
 . . .
+
+<hr>
+
+```r
+#' @param .nd named list of transposed data frames
+#' @param name string, name of variable to put into combined list
+#'
+#' @return transposed data frame
+dpurrr_combine <- function(.nd, name) {
+  # uses purrr::imap(), purrr::reduce()
+}
+```
+
+. . .
+
+<hr>
+
+```{r}
+body_mass_g_min_max <- function(acc, d) {
+  list(
+    body_mass_g_min = min(acc$body_mass_g_min, d$body_mass_g, na.rm = TRUE),
+    body_mass_g_max = max(acc$body_mass_g_max, d$body_mass_g, na.rm = TRUE)
+  )
+}
+```
+
+```{r echo=FALSE}
+#' @param .d unnamed list of named lists, i.e. transposed data frame
+#' @param name string, name of variable on which to split
+#'
+#' @return named list of transposed data frames, names: values of split variable
+dpurrr_split <- function(.d, name) {
+
+  # named list, names and values are unique values of .d[[name]]
+  d_name <- .d |> purrr::map(\(d) d[[name]]) |> unique() |> purrr::set_names()
+
+  # for each element, keep rows that "contain" the name
+  d_name |> purrr::map(\(x) .d |> purrr::keep(\(d) d[[name]] == x))
+}
+```
+
+```{r echo=FALSE}
+#' @param .nd named list of transposed data frames
+#' @param name string, name of variable to put into combined list
+#'
+#' @return transposed data frame
+dpurrr_combine <- function(.nd, name) {
+
+  .nd |>
+    # for each transposed data frame, set name within
+    purrr::imap(
+      function(d, id) {
+        d |> dpurrr_mutate(\(d) list(id) |> purrr::set_names(name))
+      }
+    ) |>
+    # reduce to single transposed data frame
+    purrr::reduce(c)
+}
+```
+
+## Our turn: dpurrr summarise with grouping (start) {auto-animate=true}
+
+```{.r code-line-numbers="1,7"}
+penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_split("species") |>
+  map(\(d) d |> dpurrr_summarise(body_mass_g_min_max)) |>
+  dpurrr_combine("species") |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+<hr>
+
+```{r echo=FALSE}
+penguins_local
+```
+
+## Our turn: dpurrr summarise with grouping (by row) {auto-animate=true}
+
+```{.r code-line-numbers="1-2,7"}
+penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_split("species") |>
+  map(\(d) d |> dpurrr_summarise(body_mass_g_min_max)) |>
+  dpurrr_combine("species") |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+<hr>
+
+```{r echo=FALSE}
+# function to write indented output
+indent <- function(...) {
+  # thanks: https://stackoverflow.com/a/42542382
+  writeLines(paste("  ", capture.output(...), sep=""))
+}
+
+penguins_list_split <-
+  penguins_list |>
+  dpurrr_split("species")
+```
+
+::::: {.columns width="100%" .border .padding-4 .height-auto .display-flex}
+
+:::: {.column width="32%" .opacity-67 .margin-4}
+::: {.padding-4}
+```{r echo=FALSE}
+indent(str_element(penguins_list_split$Adelie, 1))
+indent(str_element(penguins_list_split$Adelie, 2))
+```
+:::
+::::
+
+:::: {.column width="31%" .opacity-67 .margin-4}
+::: {.padding-4}
+```{r echo=FALSE}
+indent(str_element(penguins_list_split$Gentoo, 1))
+indent(str_element(penguins_list_split$Gentoo, 2))
+```
+:::
+::::
+
+:::: {.column width="32%" .opacity-67 .margin-4}
+::: {.padding-4}
+```{r echo=FALSE}
+indent(str_element(penguins_list_split$Chinstrap, 1))
+indent(str_element(penguins_list_split$Chinstrap, 2))
+```
+:::
+::::
+
+
+:::::
+
+## Our turn: dpurrr summarise with grouping (split) {auto-animate=true}
+
+```{.r code-line-numbers="1-3,7"}
+penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_split("species") |>
+  map(\(d) d |> dpurrr_summarise(body_mass_g_min_max)) |>
+  dpurrr_combine("species") |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+<hr>
+
+::::: {.columns width="100%" .padding-4 .height-auto .display-flex}
+
+:::: {.column width="32%" .opacity-67 .margin-4}
+```{r echo=FALSE}
+cat("$Adelie")
+```
+::: {.border .padding-4}
+```{r echo=FALSE}
+indent(str_element(penguins_list_split$Adelie, 1))
+indent(str_element(penguins_list_split$Adelie, 2))
+```
+:::
+::::
+
+:::: {.column width="31%" .opacity-67 .margin-4}
+```{r echo=FALSE}
+cat("$Gentoo")
+```
+::: {.border .padding-4}
+```{r echo=FALSE}
+indent(str_element(penguins_list_split$Gentoo, 1))
+indent(str_element(penguins_list_split$Gentoo, 2))
+```
+:::
+::::
+
+:::: {.column width="32%" .opacity-67 .margin-4}
+```{r echo=FALSE}
+cat("$Chinstrap")
+```
+::: {.border .padding-4}
+```{r echo=FALSE}
+indent(str_element(penguins_list_split$Chinstrap, 1))
+indent(str_element(penguins_list_split$Chinstrap, 2))
+```
+:::
+::::
+
+:::::
+
+## Our turn: dpurrr summarise with grouping (summarise) {auto-animate=true}
+
+```{.r code-line-numbers="1-4,7"}
+penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_split("species") |>
+  map(\(d) d |> dpurrr_summarise(body_mass_g_min_max)) |>
+  dpurrr_combine("species") |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+<hr>
+
+```{r echo=FALSE}
+penguins_list_summarise <-
+  penguins_list_split |>
+  map(\(d) d |> dpurrr_summarise(body_mass_g_min_max))
+```
+
+::::: {.columns width="100%" .padding-4 .height-auto .display-flex}
+
+:::: {.column width="32%" .margin-4}
+```{r echo=FALSE}
+cat("$Adelie")
+```
+::: {.border .padding-4}
+```{r echo=FALSE}
+indent(str_element(penguins_list_summarise$Adelie, 1))
+```
+:::
+::::
+
+:::: {.column width="31%" .margin-4}
+```{r echo=FALSE}
+cat("$Gentoo")
+```
+::: {.border .padding-4}
+```{r echo=FALSE}
+indent(str_element(penguins_list_summarise$Gentoo, 1))
+```
+:::
+::::
+
+:::: {.column width="32%" .margin-4}
+```{r echo=FALSE}
+cat("$Chinstrap")
+```
+::: {.border .padding-4}
+```{r echo=FALSE}
+indent(str_element(penguins_list_summarise$Chinstrap, 1))
+```
+:::
+::::
+
+:::::
+
+## Our turn: dpurrr summarise with grouping (combine 🌗) {auto-animate=true}
+
+```{.r code-line-numbers="1-5,7"}
+penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_split("species") |>
+  map(\(d) d |> dpurrr_summarise(body_mass_g_min_max)) |>
+  dpurrr_combine("species") |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+<hr>
+
+```{r echo=FALSE}
+penguins_list_combine <-
+  penguins_list_summarise |>
+  dpurrr_combine("species")
+```
+
+::::: {.columns width="100%" .padding-4 .height-auto .display-flex}
+
+:::: {.column width="32%" .margin-4}
+```{r echo=FALSE}
+cat("$Adelie")
+```
+::: {.border .padding-4}
+```{r echo=FALSE}
+indent(str_element(penguins_list_combine, 1))
+```
+:::
+::::
+
+:::: {.column width="31%" .margin-4}
+```{r echo=FALSE}
+cat("$Gentoo")
+```
+::: {.border .padding-4}
+```{r echo=FALSE}
+indent(str_element(penguins_list_combine, 2))
+```
+:::
+::::
+
+:::: {.column width="32%" .margin-4}
+```{r echo=FALSE}
+cat("$Chinstrap")
+```
+::: {.border .padding-4}
+```{r echo=FALSE}
+indent(str_element(penguins_list_combine, 3))
+```
+:::
+::::
+
+:::::
+
+## Our turn: dpurrr summarise with grouping (combine 🌕) {auto-animate=true}
+
+```{.r code-line-numbers="1-5,7"}
+penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_split("species") |>
+  map(\(d) d |> dpurrr_summarise(body_mass_g_min_max)) |>
+  dpurrr_combine("species") |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+<hr>
+
+::::: {.columns .border width="100%" .padding-4 .height-auto .display-flex}
+
+:::: {.column width="32%" .margin-4}
+::: {.padding-4}
+```{r echo=FALSE}
+indent(str_element(penguins_list_combine, 1))
+```
+:::
+::::
+
+:::: {.column width="31%" .margin-4}
+::: {.padding-4}
+```{r echo=FALSE}
+indent(str_element(penguins_list_combine, 2))
+```
+:::
+::::
+
+:::: {.column width="32%" .margin-4}
+::: {.padding-4}
+```{r echo=FALSE}
+indent(str_element(penguins_list_combine, 3))
+```
+:::
+::::
+
+:::::
+
+## Our turn: dpurrr summarise with grouping (result) {auto-animate=true}
+
+```{.r code-line-numbers="1-7"}
+penguins_local |>
+  dpurrr_to_list() |>
+  dpurrr_split("species") |>
+  map(\(d) d |> dpurrr_summarise(body_mass_g_min_max)) |>
+  dpurrr_combine("species") |>
+  dpurrr_to_tibble() |>
+  print()
+```
+
+<hr>
+
+```{r echo=FALSE}
+penguins_list_combine |> dpurrr_to_tibble()
+```
+
+
+## Our turn: Finally...
 
 We can agree this presents no danger to dplyr.
 
 . . .
 
-In JavaScript, data frames are often arrays of objects (lists), so you'll see formulations like this (e.g. **tidyjs**).
+In JavaScript, data frames are often arrays of objects (lists); you can use tools like [**tidyjs**](https://observablehq.com/@pbeshai/tidy-js-intro-demo?collection=@pbeshai/tidy-js):
+
+![](images/tidyjs.png){width=70% fig-align="center" fig-alt="Screenshot of tidyjs Observable page"}
 
 ## Summary
 
 ::: incremental
 - {here} can help you manage file paths within projects.
-- Functional programming:
-    - has three fundamental paradigms:
-      - filter (`purrr::keep()`), map, reduce
-      - {purrr} offers variants and adverbs
+- Functional programming has three fundamental paradigms:
+  - filter (`purrr::keep()`), map, reduce
+- {purrr} offers variants and adverbs.
 - Adverbs can help you handle failure.
 - Functions can be used as arguments to functions.
+- Functions can be returned functions.
 - Another view of data frames (if we had time).
 :::
 
