@@ -359,7 +359,7 @@ Three ways to sort this out:
 
 -   `package::function()`, used in package functions
 
--   `#' @importFrom`, also used (sparingly) in packages
+-   `#' @importFrom`, also used (sparingly) in packages (beyond our scope)
 :::
 
 ## 📦 conflicted
@@ -410,47 +410,6 @@ histogram <- function(df, var, ..., binwidth = NULL) {
 -   can be verbose, especially if calling an external function often
 :::
 
-. . .
-
-There is a balance to be struck.
-
-## `#' @importFrom`
-
-When you have a *lot* of calls to a given external function
-
-Put this in `{packagename}-package.R`:
-
-``` r
-#' @importFrom ggplot2 ggplot aes geom_histogram
-NULL
-```
-
-. . .
-
-Alternatively, from the R command prompt:
-
-``` r
-usethis::use_import_from("ggplot2", c("ggplot", "aes", "geom_histogram"))
-```
-
-## `#' @importFrom`
-
-``` r
-histogram <- function(df, var, ..., binwidth = NULL) {
-  df |> 
-    ggplot(aes(x = {{ var }})) + 
-    geom_histogram(binwidth = binwidth, ...) 
-}
-```
-
-Makes your code less verbose, but also less transparent
-
-. . .
-
-**To mitigate**:
-
--   put all your `@importFrom` in one conspicuous file: `{packagename}-package.R`
--   use judiciously
 
 ## Design and style references
 
