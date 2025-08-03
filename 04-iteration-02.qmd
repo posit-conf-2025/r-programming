@@ -267,7 +267,7 @@ Works just as well for `.Rmd`, `.qmd` files.
 ::::: columns
 ::: {.column width="40px"}
 ```         
-
+🚩
 
 
 
