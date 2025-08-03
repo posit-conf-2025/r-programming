@@ -1,13 +1,13 @@
 From R User to R Programmer
 ================
 
-### posit::conf(2024)
+### posit::conf(2025)
 
 by Emma Rand and Ian Lyttle
 
 -----
 
-:spiral_calendar: August 12, 2024  
+:spiral_calendar: September 16, 2025
 :alarm_clock:     09:00 - 17:00  
 :hotel:           ROOM TBD  
 :writing_hand:    [pos.it/conf](http://pos.it/conf)
