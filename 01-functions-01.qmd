@@ -5,7 +5,7 @@ author: "Emma Rand and Ian Lyttle <br>WiFi: Posit Conf 2024<br>Password: conf202
 format: 
   revealjs:
     theme: [simple, styles.scss]
-    footer: <https://pos.it/programming_r_24>
+    footer: <https://pos.it/r-programming-conf25>
     slide-number: true
     chalkboard: true
     code-link: true
@@ -26,7 +26,7 @@ This is a two-day, hands-on workshop for those who have embraced the tidyverse a
 
 ## Material
 
--   <http://pos.it/programming_r_24>
+-   <https://pos.it/r-programming-conf25>
 
 ## The team
 
