@@ -76,8 +76,8 @@ If you need to:
 
 ::: column
 ``` text
-/Users/ijlyttle/repos/programming-r-exercises/ 
-|-- programming-r-exercises.Rproj 
+/Users/ijlyttle/repos/r-programming-exercises/ 
+|-- r-programming-exercises.Rproj 
 |-- README.md
 |-- LICENCE.md
 |-- data/
@@ -121,8 +121,8 @@ Works just as well for `.Rmd`, `.qmd` files.
 
 ::: column
 ```         
-/Users/ijlyttle/repos/programming-r-exercises/ 
-|-- programming-r-exercises.Rproj 
+/Users/ijlyttle/repos/r-programming-exercises/ 
+|-- r-programming-exercises.Rproj 
 |-- README.md
 |-- LICENCE.md
 |-- data/
@@ -163,8 +163,8 @@ Works just as well for `.Rmd`, `.qmd` files.
 
 ::: column
 ```         
-/Users/ijlyttle/repos/programming-r-exercises/ 
-|-- programming-r-exercises.Rproj 
+/Users/ijlyttle/repos/r-programming-exercises/ 
+|-- r-programming-exercises.Rproj 
 |-- README.md
 |-- LICENCE.md
 |-- data/
@@ -205,8 +205,8 @@ Works just as well for `.Rmd`, `.qmd` files.
 
 ::: column
 ```         
-/Users/ijlyttle/repos/programming-r-exercises/ 
-|-- programming-r-exercises.Rproj 
+/Users/ijlyttle/repos/r-programming-exercises/ 
+|-- r-programming-exercises.Rproj 
 |-- README.md
 |-- LICENCE.md
 |-- data/
@@ -242,8 +242,8 @@ Works just as well for `.Rmd`, `.qmd` files.
 
 ::: column
 ```         
-/Users/ijlyttle/repos/programming-r-exercises/ 
-|-- programming-r-exercises.Rproj 
+/Users/ijlyttle/repos/r-programming-exercises/ 
+|-- r-programming-exercises.Rproj 
 |-- README.md
 |-- LICENCE.md
 |-- data/
@@ -260,7 +260,7 @@ Works just as well for `.Rmd`, `.qmd` files.
 
 <hr>
 
-`/Users/ijlyttle/repos/programming-r-exercises/`
+`/Users/ijlyttle/repos/r-programming-exercises/`
 
 ## Here: Returns full path {auto-animate="true"}
 
@@ -283,8 +283,8 @@ Works just as well for `.Rmd`, `.qmd` files.
 
 ::: column
 ```         
-/Users/ijlyttle/repos/programming-r-exercises/ 
-|-- programming-r-exercises.Rproj 
+/Users/ijlyttle/repos/r-programming-exercises/ 
+|-- r-programming-exercises.Rproj 
 |-- README.md
 |-- LICENCE.md
 |-- data/
@@ -305,7 +305,7 @@ Works just as well for `.Rmd`, `.qmd` files.
 here("data/gapminder/1952.xlsx")
 ```
 
-`/Users/ijlyttle/repos/programming-r-exercises/data/gapminder/1952.xlsx`
+`/Users/ijlyttle/repos/r-programming-exercises/data/gapminder/1952.xlsx`
 
 . . .
 
@@ -353,7 +353,7 @@ read_excel("../data/gapminder/1952.xlsx")
 Do not do this:
 
 ``` r
-setwd("/Users/ijlyttle/repos/programming-r-exercises/data/gapminder")
+setwd("/Users/ijlyttle/repos/r-programming-exercises/data/gapminder")
 
 read_excel("1952.xlsx")
 ```
@@ -779,7 +779,7 @@ poss_read_csv(I("a, b\n 1, 2"), col_types = "dd")
 
 ## Our turn: Handle failure
 
-In the `programming-r-exercises` repository:
+In the `r-programming-exercises` repository:
 
 -   look at `data/gapminder_party/`
 -   try running your script using this directory
