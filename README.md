@@ -30,7 +30,7 @@ This workshop is for you if you...
 
 ### Please note
 
-These materials are under active development, which will likely continue until the start of the workshop. Given this context: if you have a concern, please [file an issue](https://github.com/posit-conf-2024/r-programming/issues).
+These materials are under active development, which will likely continue until the start of the workshop. Given this context: if you have a concern, please [file an issue](https://github.com/posit-conf-2025/r-programming/issues).
 
 ## Prework
 
