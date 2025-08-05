@@ -31,7 +31,7 @@ This workshop is for you if you...
 
 ### Please note
 
-These materials are under active development, which will likely continue until the start of the workshop. Given this context: if you have a concern, please [file an issue](https://github.com/posit-conf-2024/programming-r/issues).
+These materials are under active development, which will likely continue until the start of the workshop. Given this context: if you have a concern, please [file an issue](https://github.com/posit-conf-2025/r-programming/issues).
 
 ## Prework
 
@@ -40,7 +40,7 @@ In short:
 -   Install current versions of R & RStudio
 -   `install.packages(c("devtools", "tidyverse", "palmerpenguins", "here"))`
 
-More details on our [pre-requisites page](https://posit-conf-2024.github.io/programming-r/pre-reqs.html).
+More details on our [pre-requisites page](https://posit-conf-2025.github.io/r-programming/pre-reqs.html).
 
 ## Schedule
 

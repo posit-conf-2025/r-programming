@@ -133,7 +133,9 @@ Reporting:
 
 ## Prerequisites
 
-We built this course using the most-recent versions of R (4.4) and RStudio (2024.04). However, things *should* work with at least R 4.2 and RStudio 2023.03. You will need packages:
+We built this course using the most-recent versions of R (4.5) and RStudio (2025.05). 
+However, things *should* work with at least R 4.2 and RStudio 2023.03. 
+You will need packages:
 
 -   {tidyverse}
 -   {palmerpenguins}
@@ -186,25 +188,25 @@ At the end of this section you will be able to:
 
 ## Project
 
-https://github.com/posit-conf-2024/programming-r-exercises
+https://github.com/posit-conf-2025/r-programming-exercises
 
 🎬 Create a Project:
 
 ```{r}
 #| eval: false
 
-usethis::use_course("posit-conf-2024/programming-r-exercises")
+usethis::use_course("posit-conf-2025/r-programming-exercises")
 ```
 
 ## 
 
 ```         
-> usethis::use_course("posit-conf-2024/programming-r-exercises")
-✔ Downloading from 'https://github.com/posit-conf-2024/programming-r-exercises/zipball/HEAD'
+> usethis::use_course("posit-conf-2025/r-programming-exercises")
+✔ Downloading from 'https://github.com/posit-conf-2025/r-programming-exercises/zipball/HEAD'
 Downloaded: 0.26 MB  
-✔ Download stored in 'C:/Users/er13/OneDrive - University of York/Desktop/Desktop/posit-conf-2024-programming-r-exercises-978baff.zip'
-✔ Unpacking ZIP file into 'posit-conf-2024-programming-r-exercises-978baff/' (45 files extracted)
-Shall we delete the ZIP file ('posit-conf-2024-programming-r-exercises-978baff.zip')?
+✔ Download stored in 'C:/Users/er13/OneDrive - University of York/Desktop/Desktop/posit-conf-2025-r-programming-exercises-978baff.zip'
+✔ Unpacking ZIP file into 'posit-conf-2025-r-programming-exercises-978baff/' (45 files extracted)
+Shall we delete the ZIP file ('posit-conf-2025-r-programming-exercises-978baff.zip')?
 
 1: Not now
 2: Yeah
@@ -216,7 +218,7 @@ Shall we delete the ZIP file ('posit-conf-2024-programming-r-exercises-978baff.z
 ## 
 
 ```         
-✔ Deleting 'posit-conf-2024-programming-r-exercises-978baff.zip'
+✔ Deleting 'posit-conf-2025-r-programming-exercises-978baff.zip'
 ✔ Opening project in RStudio
 ```
 

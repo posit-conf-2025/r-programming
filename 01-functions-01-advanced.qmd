@@ -28,13 +28,13 @@ To get started, make sure you have satisfied the [pre-requisites](pre-reqs.html)
 download the course materials:
 
 ```r
-usethis::use_course("posit-conf-2024/programming-r-exercises")
+usethis::use_course("posit-conf-2025/r-programming-exercises")
 ```
 
 Choose the option that means "yes". 
 
 ::: {.callout-tip}
-From the `programming-r-exercises` project, open the file `functions-01-advanced-type-check.R`.
+From the `r-programming-exercises` project, open the file `functions-01-advanced-type-check.R`.
 
 This will let you run the code shown here, incrementally, and incorporate your own experiments alongside.
 :::
