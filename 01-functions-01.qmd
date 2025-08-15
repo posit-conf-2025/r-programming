@@ -30,6 +30,9 @@ This is a one-day, hands-on workshop for those who have embraced the tidyverse a
 
 ## The team
 
+<!-- last-minute-tag -->
+<!-- last-minute-2025 -->
+
 ::::: columns
 ::: {.column width="55%"}
 Emma Rand
@@ -60,6 +63,9 @@ Richard Iannone
 
 ### WiFi
 
+<!-- last-minute-tag -->
+<!-- last-minute-2025 -->
+
 -   Network: <TODO>
 -   Password: <TODO>
 
@@ -68,6 +74,9 @@ Richard Iannone
 To each other! With help from Yorkshire!
 
 . . .Posit Conf 2025
+
+<!-- last-minute-tag -->
+<!-- last-minute-2025 -->
 
 ::::::::: columns
 :::: {.column width="36%"}
@@ -97,6 +106,9 @@ To each other! With help from Yorkshire!
 
 ## Code of Conduct
 
+<!-- last-minute-tag -->
+<!-- last-minute-2025 -->
+
 [Code of Conduct](https://posit.co/code-of-conduct/). **Please Review**
 
 -   💙 Treat everyone with respect
@@ -111,11 +123,17 @@ Reporting:
 
 ## Housekeeping
 
+<!-- last-minute-tag -->
+<!-- last-minute-2025 -->
+
 -   There are gender-neutral bathrooms on levels 3, 4, 5, 6 & 7
 -   Meditation/prayer rooms: in 503. Open Mon/Tues 0700 - 1900, Wed 0700 - 1700
 -   Lactation room: in 509 Open Mon/Tues 0700 - 1900, Wed 0700 - 1700
 
 ## 🙏 to
+
+<!-- last-minute-tag -->
+<!-- last-minute-2025 -->
 
 -   Richard
 
@@ -158,7 +176,10 @@ You will need packages:
 
 ## How we will work
 
--   stickies (TODO, update with current colors)
+<!-- last-minute-tag -->
+<!-- last-minute-2025 -->
+
+-   stickies 
 
     -   🟦 I'm all good, I'm done
 

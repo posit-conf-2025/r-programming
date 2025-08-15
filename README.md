@@ -7,6 +7,9 @@ by Emma Rand and Ian Lyttle
 
 -----
 
+<!-- last-minute-tag -->
+<!-- last-minute-2025 -->
+
 :spiral_calendar: September 16, 2025
 :alarm_clock:     09:00 - 17:00  
 :hotel:           ROOM TBD  
