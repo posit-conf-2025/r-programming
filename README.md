@@ -56,8 +56,8 @@ More details on our [pre-requisites page](https://posit-conf-2025.github.io/r-pr
 ## Instructors
 
 **Emma Rand**\
-*Senior Lecturer, University of York*\
-Emma Rand is a Senior Lecturer in the Department of Biology at the University of York where she specializes in teaching data science and reproducibility, particularly to those who do not see themselves as programmers. She leads a UKRI funded project called Cloud-SPAN which trains researchers in cloud-based high performance computing for 'omics. She is a Software Sustainability Institute Fellow, a Teaching team lead for R Forwards and delivers data science training for the Royal Society of Biology and the Biochemical Society.
+*Professor, University of York*\
+Emma Rand is a Professor in the Department of Biology at the University of York where she specializes in teaching data science and reproducibility, particularly to those who do not see themselves as programmers. She leads a UKRI funded project called Cloud-SPAN which trains researchers in cloud-based high performance computing for 'omics. She is a Software Sustainability Institute Fellow, a Teaching team lead for R Forwards and delivers data science training for the Royal Society of Biology and the Biochemical Society.
 
 **Ian Lyttle**\
 *Data Scientist, Schneider Electric*\
