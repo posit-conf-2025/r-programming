@@ -40,7 +40,7 @@ Emma Rand
 🦋[\@3mmarand.bsky.social](https://bsky.app/profile/3mmarand.bsky.social)
 🐘[\@3mma\@mastodon.social](https://mastodon.social/@3mma)
 
-Lionel Henry
+Garrett Grolemund
 :::
 
 ::: {.column width="45%"}
@@ -48,8 +48,6 @@ Ian Lyttle
 
 🦋[\@ijlyttle.bsky.social](https://bsky.app/profile/ijlyttle.bsky.social)
 🐘[\@ijlyttle\@vis.social](https://mastodon.social/@ijlyttle@vis.social)
-
-Richard Iannone
 :::
 :::::
 
@@ -137,7 +135,7 @@ Reporting:
 <!-- last-minute-tag -->
 <!-- last-minute-2025 -->
 
--   Richard
+-   Garrett
 
 -   colleagues, friends and learners at Schneider Electric, University of York and RForwards!
 

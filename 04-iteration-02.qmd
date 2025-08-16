@@ -1866,7 +1866,7 @@ Data from the survey informs curriculum and format decisions for future conf wor
 
 ::: incremental
 -   Emma
--   Richard
+-   Garrett
 -   Mine Çetinkaya-Rundel, Posit
 -   **You** 🤗
 :::
