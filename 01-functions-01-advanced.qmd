@@ -6,7 +6,9 @@ Students in this course arrive with a wide range of experience;
 a bunch of you already how the basics of functions.
 For you, we offer this self-paced module, in the place of "Vector Functions".
 
-This material is inspired by [Josiah Perry's excellent blog post](https://josiahparry.com/posts/2024-06-30-type-safety/). 
+This material is inspired by [Josiah Perry's excellent blog post](https://josiahparry.com/posts/2024-06-30-type-safety/).
+
+If you are planning to attend [Tidy Dev Day](https://www.tidyverse.org/blog/2025/07/tdd-2025/), just after posit::conf(2025), there are a [couple of issues related to this material](https://github.com/r-lib/rlang/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22tidy-dev-day%20%3Anerd_face%3A%22) that you might be interested to work on.
 
 ---
 
@@ -19,8 +21,8 @@ Using the type-checking functions provided by the {rlang} team lets you fail cle
 We will show how to use the type-checking functions in your own functions: first in a script, then some tips on how to use them in a package.
 
 Please keep in mind that this capability is under development by the Tidyverse team. 
-We will show you the tools the Tidyverse team use, themselves, as of Summer 2024.
-We can offer our best advice for now, but there is almost certainly something more-documented and more-supported on the way.
+We will show you the tools the Tidyverse team use, themselves, as of Summer 2025.
+We can offer our best advice for now, but we suspect something more-documented and more-supported is on the way.
 
 ## Get started
 
@@ -134,7 +136,7 @@ check_environment()
 ### Vector checks
 
 The vector-checking functions are concerned with values that may have more than one element.
-As of Summer 2024, these are the functions available:
+As of Summer 2025, these functions are available:
 
 ```r
 check_data_frame()
@@ -263,11 +265,11 @@ There are two steps, to be run from R within your package-project:
    usethis::use_package("rlang")
    ```
 
-  - If you use {roxygen2} put this line in a conspicuous place, like a [`-package.R` file](https://github.com/r-lib/usethis/blob/224846399a51e2ec54c21b32307584fd9f106e7f/R/usethis-package.R#L6):
+   - If you use {roxygen2} put this line in a conspicuous place, like a [`-package.R` file](https://github.com/r-lib/usethis/blob/224846399a51e2ec54c21b32307584fd9f106e7f/R/usethis-package.R#L6):
   
-    ```r
-    #' @import rlang
-    ```
+     ```r
+     #' @import rlang
+     ```
   
 There are some consequences:
 
