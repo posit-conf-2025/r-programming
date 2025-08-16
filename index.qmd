@@ -35,9 +35,11 @@ These materials are under active development, which will likely continue until t
 
 ## Prework
 
+<!-- last-minute-tag -->
+
 In short:
 
--   Install current versions of R & RStudio
+-   Ensure you have current-ish versions of R (\>= 4.2) & RStudio
 -   `install.packages(c("devtools", "tidyverse", "palmerpenguins", "here"))`
 
 More details on our [pre-requisites page](https://posit-conf-2025.github.io/r-programming/pre-reqs.html).
