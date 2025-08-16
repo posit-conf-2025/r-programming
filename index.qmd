@@ -8,10 +8,10 @@ by Emma Rand and Ian Lyttle
 
 ------------------------------------------------------------------------
 
-:spiral_calendar: September 16, 2025
-:alarm_clock: 09:00 - 17:00
-:hotel: TBD
-:writing_hand: [pos.it/r-programming-conf25](https://pos.it/r-programming-conf25)
+:spiral_calendar: September 16, 2025\
+:alarm_clock: 09:00 - 17:00\
+:hotel: TBD\
+:writing_hand: [pos.it/r-programming-conf25](https://pos.it/r-programming-conf25)\
 
 ------------------------------------------------------------------------
 
