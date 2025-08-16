@@ -37,6 +37,7 @@ This is a one-day, hands-on workshop for those who have embraced the tidyverse a
 ::: {.column width="55%"}
 Emma Rand
 
+🦋[\@3mmarand.bsky.social](https://bsky.app/profile/3mmarand.bsky.social)
 🐘[\@3mma\@mastodon.social](https://mastodon.social/@3mma)
 
 Lionel Henry
@@ -45,6 +46,7 @@ Lionel Henry
 ::: {.column width="45%"}
 Ian Lyttle
 
+🦋[\@ijlyttle.bsky.social](https://bsky.app/profile/ijlyttle.bsky.social)
 🐘[\@ijlyttle\@vis.social](https://mastodon.social/@ijlyttle@vis.social)
 
 Richard Iannone
