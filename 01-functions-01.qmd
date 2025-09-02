@@ -756,7 +756,7 @@ penguins |>
 ## Your turn
 
 🎬 Write a function to compute the sums of squares (sum of the squared
-deviations from the mean)
+deviations from the mean). This can be calculated with either:
 
 $$SS(x) = \sum{(x - \bar{x})^2}$$
 
@@ -764,11 +764,11 @@ or
 
 $$SS(x) = s^2 * (n-1)$$
 
-## A solution - 1
+## A solution - one option
 
 ```{r}
 sum_sq <- function(x){
- sum((x[!is.na(x)] - mean(x[!is.na(x)]))^2)
+ sum((x - mean(x, na.rm = TRUE))^2, na.rm = TRUE)
 }
 ```
 
