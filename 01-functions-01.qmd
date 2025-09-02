@@ -416,7 +416,7 @@ with the simple things.
 
 We will cover two types of function
 
-1.  vector functions: one of more vectors as input, one vector as output
+1.  vector functions: one or more vectors as input, one vector as output
 
 . . .
 
@@ -700,7 +700,7 @@ $$
 
 We will cover two types of function
 
-1.  vector functions: one of more vectors as input, one vector as output
+1.  vector functions: one or more vectors as input, one vector as output
 
     i.  ✔️ output same length as input.
 
@@ -784,7 +784,7 @@ sum_sq(penguins$bill_length_mm)
 
 We will cover two types of function
 
-1.  vector functions: one of more vectors as input, one vector as output
+1.  vector functions: one or more vectors as input, one vector as output
 
     i.  ✔️ output same length as input.
 
@@ -879,18 +879,18 @@ and makes life easier when working interactively
 But not so useful in functions
 
 Because of data-masking, `summarise()` in `my_summary()` is looking for
-a column literally called `column` in the dataframe that has been passed
-in. It is not looking in the variable `column` for the name of column
-you want to give it.
+a column *literally* called `column` in the dataframe that has been
+passed in. It is not looking *inside* the variable `column` for the name
+of column you want to give it.
 
 . . .
 
-[Programming with
+Read more: [Programming with
 dplyr](https://dplyr.tidyverse.org/articles/programming.html)
 
 ## Fix `my_summary()` function
 
-The solution is to use embracing: `{{ var }}`
+The solution is to use embracing: ``` {``{ var }``} ```
 
 ```{r}
 my_summary <- function(df, column){
@@ -924,8 +924,9 @@ When tidy evaluation is used
 
 ## Your turn
 
-🎬 Write a function to calculate the median, maximum and minimum values
-of a variable grouped by another variable.
+🎬 Write a new summary function which calculates the median, maximum and
+minimum values of a variable. Incorporate an argument to allow the
+summary to be performed grouped by another variable.
 
 ## A solution - 1
 
@@ -975,9 +976,11 @@ my_summary(penguins, bill_length_mm)
 
 🎬 Try it out with more than one group
 
+. . .
+
 ```{r}
 #| error: true
-my_summary(penguins, bill_length_mm, c(species, island),)
+my_summary(penguins, bill_length_mm, c(species, island))
 ```
 
 😕
@@ -1022,15 +1025,16 @@ my_summary(penguins, bill_length_mm, c(species, island))
 -   Writing functions can make you more efficient and make your code
     more readable. This can be just for your benefit.
 
--   Vector functions take one of more vectors as input; output can be a
-    vector (useful in `mutate()` and `filter()`) or a single value
+-   Vector functions take one or more vectors as input; their output can
+    be a vector (useful in `mutate()` and `filter()`) or a single value
     (useful in `summarise()`)
 
--   Dataframe functions take a dataframe as input and output a dataframe
+-   Dataframe functions take a dataframe as input and give a dataframe
+    as output
 
 -   Give arguments a default where possible
 
--   We use `{{ var }}` embracing to manage data masking
+-   We use ``` {``{ var }``} ``` embracing to manage data masking
 
 -   We use `pick()` to select more than one variable
 :::
