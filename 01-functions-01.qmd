@@ -196,7 +196,7 @@ RStudio 2023.03. You will need packages:
 ## Schedule {.smaller}
 
 | Time | Activity |
-|:-----------------------|:-----------------------------------------------|
+|:---|:---|
 | 09:00 - 10:30 | [Functions 1](01-functions-01.html) Introduction, vector and dataframe functions, embracing |
 | 10:30 - 11:00 | ☕ *Coffee break* |
 | 11:00 - 12:30 | [Functions 2](02-functions-02.html) Plot functions, style and side effects |
@@ -428,8 +428,8 @@ We will cover two types of function
 
 1.  vector functions: one of more vectors as input, one vector as output
 
-    i.  output same length as input. "mutate" functions will work well
-        in `mutate()` and `filter()`. Principles of writing functions
+    i.  output length is same as input length. These functions will work
+        well in `mutate()` and `filter()`.
 
     ii. summary functions: input is vector, output is a single value
 
@@ -578,7 +578,7 @@ x before the mean is computed.*
 . . .
 
 Suppose we want to specify the *middle* proportion left rather than the
-proportion trimmed from each end \[\^1\]
+proportion trimmed from each end.
 
 ## A modification
 
