@@ -17,10 +17,16 @@ bibliography: references.bib
 
 ## Introductions
 
-This is a one-day, hands-on workshop for those who have embraced the tidyverse and want to improve their R programming skills and, especially, reduce the amount of duplication in their code.
+This is a one-day, hands-on workshop for those who have embraced the
+tidyverse and want to improve their R programming skills and,
+especially, reduce the amount of duplication in their code.
 
--   do you have experience equivalent to an introductory data science course using tidyverse?
--   are you comfortable with the [Whole game](https://r4ds.hadley.nz/whole-game.html) chapter of [R for Data Science (2nd Edition)](https://r4ds.hadley.nz/) by by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
+-   do you have experience equivalent to an introductory data science
+    course using tidyverse?
+-   are you comfortable with the [Whole
+    game](https://r4ds.hadley.nz/whole-game.html) chapter of [R for Data
+    Science (2nd Edition)](https://r4ds.hadley.nz/) by by Hadley
+    Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 
 \
 
@@ -31,22 +37,25 @@ This is a one-day, hands-on workshop for those who have embraced the tidyverse a
 ## The team
 
 <!-- last-minute-tag -->
+
 <!-- last-minute-2025 -->
 
 ::::: columns
 ::: {.column width="55%"}
-Emma Rand
+**Emma Rand**
 
 🦋[\@3mmarand.bsky.social](https://bsky.app/profile/3mmarand.bsky.social)
+
 🐘[\@3mma\@mastodon.social](https://mastodon.social/@3mma)
 
-Garrett Grolemund
+**Garrett Grolemund**
 :::
 
 ::: {.column width="45%"}
-Ian Lyttle
+**Ian Lyttle**
 
 🦋[\@ijlyttle.bsky.social](https://bsky.app/profile/ijlyttle.bsky.social)
+
 🐘[\@ijlyttle\@vis.social](https://mastodon.social/@ijlyttle@vis.social)
 :::
 :::::
@@ -57,13 +66,17 @@ Ian Lyttle
 
 -   [R for Data Science (2e)](https://r4ds.hadley.nz/) @wickham2023
 
--   [The tidyverse style guide](https://style.tidyverse.org/index.html) @wickham-style
+-   [The tidyverse style guide](https://style.tidyverse.org/index.html)
+    @wickham-style
 
--   [Programming with dplyr vignette](https://dplyr.tidyverse.org/articles/programming.html) @dplyr
+-   [Programming with dplyr
+    vignette](https://dplyr.tidyverse.org/articles/programming.html)
+    @dplyr
 
 ### WiFi
 
 <!-- last-minute-tag -->
+
 <!-- last-minute-2025 -->
 
 -   Network: <TODO>
@@ -76,6 +89,7 @@ To each other! With help from Yorkshire!
 . . .Posit Conf 2025
 
 <!-- last-minute-tag -->
+
 <!-- last-minute-2025 -->
 
 ::::::::: columns
@@ -83,7 +97,13 @@ To each other! With help from Yorkshire!
 ::: {style="font-size: 40%;"}
 ![](images/quality-street.png){width="300"}
 
-*Ingredients*: Sugar, Glucose syrup, Cocoa mass, Vegetable fats (Palm, Rapeseed, Sunflower, Coconut,Mango kernel/ Sal/ Shea), Sweetened condensed skimmed milk (Skimmed milk, Sugar), Cocoa butter, Dried whole milk, Glucose-fructose syrup, Coconut, Lactose and proteins from whey (from Milk), Whey powder (from Milk), Hazelnuts, Skimmed milk powder, Butter (from Milk), Emulsifiers (Sunflower lecithin, E471), Flavourings, Butterfat (from Milk), Fat-reduced cocoa powder, Salt, Lactic acid.
+*Ingredients*: Sugar, Glucose syrup, Cocoa mass, Vegetable fats (Palm,
+Rapeseed, Sunflower, Coconut,Mango kernel/ Sal/ Shea), Sweetened
+condensed skimmed milk (Skimmed milk, Sugar), Cocoa butter, Dried whole
+milk, Glucose-fructose syrup, Coconut, Lactose and proteins from whey
+(from Milk), Whey powder (from Milk), Hazelnuts, Skimmed milk powder,
+Butter (from Milk), Emulsifiers (Sunflower lecithin, E471), Flavourings,
+Butterfat (from Milk), Fat-reduced cocoa powder, Salt, Lactic acid.
 :::
 ::::
 
@@ -91,7 +111,9 @@ To each other! With help from Yorkshire!
 ::: {style="font-size: 40%;"}
 ![](images/after-eight-thin-mint-squares-25-piece-box.jpg){width="300"}
 
-*Ingredients*: Sugar, Semi-Sweet Chocolate (Sugar, Chocolate, Cocoa Butter, Milkfat, Soy and Sunflower Lecithin, Natural Vanilla Flavor), Glucose Syrup, Peppermint Oil, Citric Acid, Invertase.
+*Ingredients*: Sugar, Semi-Sweet Chocolate (Sugar, Chocolate, Cocoa
+Butter, Milkfat, Soy and Sunflower Lecithin, Natural Vanilla Flavor),
+Glucose Syrup, Peppermint Oil, Citric Acid, Invertase.
 :::
 ::::
 
@@ -99,7 +121,10 @@ To each other! With help from Yorkshire!
 ::: {style="font-size: 40%;"}
 ![](images/haribo-strawbs.jpeg){width="300"}
 
-*Ingredients*: Glucose Syrup, Sugar, Starch, Acid: Citric Acid, Flavouring, Fruit and Plant Concentrates: Aronia, Blackcurrant, Elderberry, Grape, Lemon, Orange, Safflower Spirulina, Caramelised Sugar Syrup, Glazing Agents: Beeswax, Carnauba Wax, Elderberry Extract.
+*Ingredients*: Glucose Syrup, Sugar, Starch, Acid: Citric Acid,
+Flavouring, Fruit and Plant Concentrates: Aronia, Blackcurrant,
+Elderberry, Grape, Lemon, Orange, Safflower Spirulina, Caramelised Sugar
+Syrup, Glazing Agents: Beeswax, Carnauba Wax, Elderberry Extract.
 :::
 ::::
 :::::::::
@@ -107,6 +132,7 @@ To each other! With help from Yorkshire!
 ## Code of Conduct
 
 <!-- last-minute-tag -->
+
 <!-- last-minute-2025 -->
 
 [Code of Conduct](https://posit.co/code-of-conduct/). **Please Review**
@@ -124,20 +150,24 @@ Reporting:
 ## Housekeeping
 
 <!-- last-minute-tag -->
+
 <!-- last-minute-2025 -->
 
 -   There are gender-neutral bathrooms on levels 3, 4, 5, 6 & 7
--   Meditation/prayer rooms: in 503. Open Mon/Tues 0700 - 1900, Wed 0700 - 1700
+-   Meditation/prayer rooms: in 503. Open Mon/Tues 0700 - 1900, Wed
+    0700 - 1700
 -   Lactation room: in 509 Open Mon/Tues 0700 - 1900, Wed 0700 - 1700
 
 ## 🙏 to
 
 <!-- last-minute-tag -->
+
 <!-- last-minute-2025 -->
 
 -   Garrett
 
--   colleagues, friends and learners at Schneider Electric, University of York and RForwards!
+-   colleagues, friends and learners at Schneider Electric, University
+    of York and RForwards!
 
 -   Posit team and especially Mine Çetinkaya-Rundel
 
@@ -151,21 +181,22 @@ Reporting:
 
 ## Prerequisites
 
-We built this course using the most-recent versions of R (4.5) and RStudio (2025.05). 
-However, things *should* work with at least R 4.2 and RStudio 2023.03. 
-You will need packages:
+We built this course using the most-recent versions of R (4.5) and
+RStudio (2025.05). However, things *should* work with at least R 4.2 and
+RStudio 2023.03. You will need packages:
 
 -   {tidyverse}
 -   {palmerpenguins}
 -   {devtools}
 -   {here}
 
-🎬 Detailed instructions for installing these were covered in [Prerequisites](pre-reqs.html)
+🎬 Detailed instructions for installing these were covered in
+[Prerequisites](pre-reqs.html)
 
 ## Schedule {.smaller}
 
 | Time | Activity |
-|:----------------------|:-----------------------------------------------|
+|:-----------------------|:-----------------------------------------------|
 | 09:00 - 10:30 | [Functions 1](01-functions-01.html) Introduction, vector and dataframe functions, embracing |
 | 10:30 - 11:00 | ☕ *Coffee break* |
 | 11:00 - 12:30 | [Functions 2](02-functions-02.html) Plot functions, style and side effects |
@@ -177,9 +208,10 @@ You will need packages:
 ## How we will work
 
 <!-- last-minute-tag -->
+
 <!-- last-minute-2025 -->
 
--   stickies 
+-   stickies
 
     -   🟦 I'm all good, I'm done
 
@@ -202,7 +234,8 @@ At the end of this section you will be able to:
     -   that take one or more vectors as input and output a single value
 -   specify defaults for function argument
 -   write functions that take dataframes as input and output a dataframe
--   using embracing to allow data masking and tidy selection within functions
+-   using embracing to allow data masking and tidy selection within
+    functions
 :::
 
 # Set up
@@ -290,7 +323,8 @@ glimpse(penguins)
 ## Rationale
 
 -   impact from code: reach and clarity
--   efficiency: update code in one place, decrease error rate, improve ability to reuse
+-   efficiency: update code in one place, decrease error rate, improve
+    ability to reuse
 
 ## Example
 
@@ -325,11 +359,14 @@ penguins |> ggplot(aes(x = body_mass_g)) +
 
 ## Example
 
--   difficult to plot on same axis or determine what value is large for that variable
+-   difficult to plot on same axis or determine what value is large for
+    that variable
 
--   A common solution is to apply a $z$ score transformation to each variable.
+-   A common solution is to apply a $z$ score transformation to each
+    variable.
 
--   Normalises the values to have a mean of 0 and a standard deviation of 1
+-   Normalises the values to have a mean of 0 and a standard deviation
+    of 1
 
 $$z = \frac{x - \bar{x}}{s.d.}$$
 
@@ -370,7 +407,8 @@ Writing a function:
 -   will make code shorter
 -   can be reused
 
-🔑️ You may think you have to write complex functions - you don't! Start with the simple things.
+🔑️ You may think you have to write complex functions - you don't! Start
+with the simple things.
 
 # Types of function
 
@@ -390,7 +428,8 @@ We will cover two types of function
 
 1.  vector functions: one of more vectors as input, one vector as output
 
-    i.  output same length as input. "mutate" functions will work well in `mutate()` and `filter()`. Principles of writing functions
+    i.  output same length as input. "mutate" functions will work well
+        in `mutate()` and `filter()`. Principles of writing functions
 
     ii. summary functions: input is vector, output is a single value
 
@@ -422,7 +461,9 @@ name <- function(arguments) {
 
 ## Function name
 
-Use a verb - [The tidyverse style guide](https://style.tidyverse.org/index.html) [@wickham-style] but good advice regardless
+Use a verb - [The tidyverse style
+guide](https://style.tidyverse.org/index.html) [@wickham-style] but good
+advice regardless
 
 . . .
 
@@ -430,7 +471,8 @@ Difficulty in naming? Should this be two or three functions?
 
 . . .
 
-What should we call the function we write to do a $z$ score transformation?
+What should we call the function we write to do a $z$ score
+transformation?
 
 ## Arguments
 
@@ -530,19 +572,23 @@ Much shorter, much more clear.
 
 `mean()` has a `trim` argument: `mean(x, trim = 0, na.rm = FALSE, ...)`
 
-*the fraction (0 to 0.5) of observations to be trimmed from each end of x before the mean is computed.*
+*the fraction (0 to 0.5) of observations to be trimmed from each end of
+x before the mean is computed.*
 
 . . .
 
-Suppose we want to specify the *middle* proportion left rather than the proportion trimmed from each end \[\^1\]
+Suppose we want to specify the *middle* proportion left rather than the
+proportion trimmed from each end \[\^1\]
 
 ## A modification
 
--   A value of 0.1 for `trim` trims 0.1 from each end leaving 0.8 in the middle
+-   A value of 0.1 for `trim` trims 0.1 from each end leaving 0.8 in the
+    middle
 
 -   trim = (1 - middle)/2
 
-![Trim is the proportion trimmed off each end; middle is what's left](images/vector-functions-trim.png){fig-alt="schematic of trim and middle demonstrating that trim = (1 - middle)/2"}
+![Trim is the proportion trimmed off each end; middle is what's
+left](images/vector-functions-trim.png){fig-alt="schematic of trim and middle demonstrating that trim = (1 - middle)/2"}
 
 ## Add an argument
 
@@ -592,7 +638,8 @@ to_z(penguins$bill_length_mm)
 
 ## Your turn
 
-🎬 Write a function that performs the Box-Cox power transformation using the value of (non-zero) lambda ($\lambda$) supplied.
+🎬 Write a function that performs the Box-Cox power transformation using
+the value of (non-zero) lambda ($\lambda$) supplied.
 
 ## Your turn: Box-Cox
 
@@ -657,7 +704,8 @@ We will cover two types of function
 
     i.  ✔️ output same length as input.
 
-    **ii. ➡️ summary functions: input is vector, output is a single value**
+    **ii. ➡️ summary functions: input is vector, output is a single
+    value**
 
 2.  data frame functions: df as input and df as output
 
@@ -684,7 +732,9 @@ sd_error <- function(x){
 
 . . .
 
-Note: `sum(TRUE)` = 1 and `sum(FALSE)` = 0 Thus,`sum(!is.na(x))` gives you the number of `TRUE` (i.e., the number of non-NA values) and is a bit shorter than `length(x[!is.na(x)])`
+Note: `sum(TRUE)` = 1 and `sum(FALSE)` = 0 Thus,`sum(!is.na(x))` gives
+you the number of `TRUE` (i.e., the number of non-NA values) and is a
+bit shorter than `length(x[!is.na(x)])`
 
 ## Try it out
 
@@ -705,7 +755,8 @@ penguins |>
 
 ## Your turn
 
-🎬 Write a function to compute the sums of squares (sum of the squared deviations from the mean)
+🎬 Write a function to compute the sums of squares (sum of the squared
+deviations from the mean)
 
 $$SS(x) = \sum{(x - \bar{x})^2}$$
 
@@ -790,7 +841,9 @@ my_summary(penguins, bill_length_mm)
 
 ## Tidy evaluation
 
-`tidyverse` functions like `dplyr::summarise()` use "tidy evaluation" so you can refer to the names of variables inside dataframes. For example, you can use:
+`tidyverse` functions like `dplyr::summarise()` use "tidy evaluation" so
+you can refer to the names of variables inside dataframes. For example,
+you can use:
 
 either
 
@@ -812,7 +865,8 @@ summarise(penguins, mean = mean(penguins$bill_depth_mm))
 
 . . .
 
-This is known as data-masking: the dataframe environment masks the user environment by giving priority to the dataframe.
+This is known as data-masking: the dataframe environment masks the user
+environment by giving priority to the dataframe.
 
 ## Data masking is great....
 
@@ -822,11 +876,15 @@ and makes life easier when working interactively
 
 But not so useful in functions
 
-Because of data-masking, `summarise()` in `my_summary()` is looking for a column literally called `column` in the dataframe that has been passed in. It is not looking in the variable `column` for the name of column you want to give it.
+Because of data-masking, `summarise()` in `my_summary()` is looking for
+a column literally called `column` in the dataframe that has been passed
+in. It is not looking in the variable `column` for the name of column
+you want to give it.
 
 . . .
 
-[Programming with dplyr](https://dplyr.tidyverse.org/articles/programming.html)
+[Programming with
+dplyr](https://dplyr.tidyverse.org/articles/programming.html)
 
 ## Fix `my_summary()` function
 
@@ -847,7 +905,8 @@ my_summary <- function(df, column){
 
 -   look inside `column` variable
 -   style with spaces
--   `.groups = "drop"` to avoid message and leave the data in an ungrouped state
+-   `.groups = "drop"` to avoid message and leave the data in an
+    ungrouped state
 
 ## Use function
 
@@ -863,7 +922,8 @@ When tidy evaluation is used
 
 ## Your turn
 
-🎬 Write a function to calculate the median, maximum and minimum values of a variable grouped by another variable.
+🎬 Write a function to calculate the median, maximum and minimum values
+of a variable grouped by another variable.
 
 ## A solution - 1
 
@@ -922,7 +982,8 @@ my_summary(penguins, bill_length_mm, c(species, island),)
 
 ## A solution - 3
 
-Use `pick()` which allows you to select a subset of columns inside a data masking function:
+Use `pick()` which allows you to select a subset of columns inside a
+data masking function:
 
 . . .
 
@@ -949,15 +1010,19 @@ my_summary(penguins, bill_length_mm, c(species, island))
 
 -   Short cuts:
 
-    -   put cursor on a function call and press F2 to find its definition
+    -   put cursor on a function call and press F2 to find its
+        definition
     -   Ctrl+. opens section/file search
 
 ## Summary ☕
 
 ::: {style="font-size: 80%;"}
--   Writing functions can make you more efficient and make your code more readable. This can be just for your benefit.
+-   Writing functions can make you more efficient and make your code
+    more readable. This can be just for your benefit.
 
--   Vector functions take one of more vectors as input; output can be a vector (useful in `mutate()` and `filter()`) or a single value (useful in `summarise()`)
+-   Vector functions take one of more vectors as input; output can be a
+    vector (useful in `mutate()` and `filter()`) or a single value
+    (useful in `summarise()`)
 
 -   Dataframe functions take a dataframe as input and output a dataframe
 
