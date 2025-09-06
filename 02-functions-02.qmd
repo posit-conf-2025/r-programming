@@ -249,7 +249,7 @@ sorted_bars <- function(df, var) {
 ```
 
 ::: incremental
--   If using `{{ }}` to specify a new column, use `:=`, not `=`.
+-   If using `{{}}` to specify a new column, use `:=`, not `=`.
 
 -   `fct_infreq()` reorders by decreasing frequency.
 
@@ -265,7 +265,7 @@ sorted_bars <- function(df, var) {
 
     -   function receiving the "embracing" has to be aware
     -   look for `<data-masking>` in the help
-    -   use `rlang::englue()` to interpolate variables `{{}}` and values `{}`
+    -   use `rlang::englue()` to interpolate variable-names `{{}}` and values `{}`
 
 -   `...` is a useful "escape hatch" in function design:
 
