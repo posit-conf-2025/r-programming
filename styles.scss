@@ -47,3 +47,10 @@ code.sourceCode {
   // ovverride quarto's use of 'display: initial;' for div.columns
   display: flex !important; 
 }
+
+.callout pre > code {
+    // ovverride quarto font size for code callouts
+    // there is font-size 0.7em somehere in the chain,
+    // this hack is designed to "cancel" that:
+    font-size: 1.43em !important;
+}
