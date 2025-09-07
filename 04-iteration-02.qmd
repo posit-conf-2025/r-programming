@@ -692,7 +692,6 @@ num |> reduce(\(acc, x) sum(acc, x, na.rm = TRUE))
 
 ::: {.callout-caution title="No longer recommended"}
 ``` r
-# TODO: check that newer Quarto will fix font-size here
 num |> reduce(sum, na.rm = TRUE)
 ```
 :::
