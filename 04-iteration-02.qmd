@@ -931,6 +931,60 @@ ggplot(penguins, aes(x = bill_length_mm, color = species)) +
 
 To me, this is a cleaner solution than mutating the data from decimal to percent.
 
+## Declariative vs. Imperative Programming
+
+Let's say you wanted to double this:
+
+```{r}
+original <- 1:4
+```
+
+<br>
+
+::::: {.columns}
+
+::: {.column width="45%" .fragment}
+### Declarative
+
+Focus on **what**:
+
+```{r}
+double <- original |> map_dbl(\(x) 2 * x)
+double
+```
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="45%" .fragment}
+### Imperative
+
+Focus on **how**:
+
+```{r}
+double = numeric(length(original))
+for (i in seq_along(original)) {
+  double[i] = original[i] * 2
+}
+double
+```
+:::
+
+:::::
+
+<br>
+
+::: {.fragment}
+Of course, base R has the ultimate declarative approach:
+
+```{r}
+2 * original
+```
+
+ui.dev has a [very accessible article](https://ui.dev/imperative-vs-declarative-programming) on the two approaches.
+:::
+
 ## If we have time
 
 Three fundamental paradigms in functional programming
@@ -938,7 +992,7 @@ Three fundamental paradigms in functional programming
 Given a list and a function:
 
 ::: incremental
--   `filter()`: make a new list, subset of old list
+-   filter, `keep()`: make a new list, subset of old list
 -   `map()`: make a new list, operating on each element
 -   `reduce()`: make a new "thing"
 :::
@@ -971,6 +1025,8 @@ library("conflicted")
 library("palmerpenguins")
 library("dplyr")
 library("purrr")
+
+conflicts_prefer(palmerpenguins::penguins)
 
 # simplify penguins (Sorry Allison!)
 penguins_local <-
