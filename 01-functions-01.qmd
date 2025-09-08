@@ -638,19 +638,43 @@ to_z(penguins$bill_length_mm)
 
 ## Your turn
 
-🎬 Write a function that performs the Box-Cox power transformation using
-the value of (non-zero) lambda ($\lambda$) supplied.
+The Box-Cox transformation is a statistical technique that converts
+non-normally distributed data to an approximately normal distribution by
+applying a power-transformation based on a parameter lambda ($\lambda$).
+
+The transformation on a variable $x$ is:
+
+$$bc = \frac{x^{\lambda} - 1}{\lambda} $$
+
+You don't need to understand this!
 
 ## Your turn: Box-Cox
 
-$$bc = \frac{x^{\lambda} - 1}{\lambda}  \text{ for }\lambda \ne 0$$
+🎬 Your task is to write a function that performs the Box-Cox power
+transformation
 
--   Set the default $\lambda = 1$
+🎬 First, create a vector of values for testing the function:
 
-. . .
+```{r}
+vals <- rexp(10000, 10) 
+```
 
--   Still have time? Check $\lambda \ne 0$
--   Still have time? Check and amend for:
+Effect of Box-Cox transformation
+
+![Distribution of values before (left) and after (right) a Box-Cox
+transformation.](images/box-cox.png)
+
+## Your turn: Box-Cox
+
+1.  Set the default $\lambda = 1$
+
+2.  Still have time? In fact, the transformation only applies when
+    $\lambda \ne 0$. Check if $\lambda = 0$ and if it does, set it to
+    0.0001 and print "Lambda cannot be 0, setting to 0.0001"
+
+3.  Still have time? In fact, the transformation is defined as $log(x)$
+    when $\lambda = 0$. Amend the function so it performs the
+    appropriate transformation depending on the value of $\lambda$.
 
 $$
 bc = \begin{cases}
@@ -659,7 +683,7 @@ bc = \begin{cases}
 \end{cases}
 $$
 
-## A solution 1
+## 1. A solution
 
 ```{r}
 to_box_cox <- function(x, lambda = 1) {
@@ -667,14 +691,7 @@ to_box_cox <- function(x, lambda = 1) {
 }
 ```
 
-## A solution 1 - test
-
-```{r}
-vals <- rexp(10000, 10) 
-vals |> hist()
-```
-
-## A solution 1 - test
+Test:
 
 ```{r}
 to_box_cox(vals, 0.3) |> 
@@ -685,16 +702,44 @@ to_box_cox(vals, 0.3) |>
 
 Check $\lambda \ne 0$
 
-## A solution 3
+## 2. A solution
 
-Check and amend for:
+```{r}
+to_box_cox <- function(x, lambda = 1) {
+  if (lambda == 0) {
+    lambda <- 0.0001
+    message("Lambda cannot be 0, setting to 0.0001")
+  }
+  (x^lambda - 1) / lambda
+}
+```
 
-$$
-bc = \begin{cases}
-  \frac{x^{\lambda} - 1}{\lambda} & \text{for }\lambda \ne 0\\    
-  log(x) & \text{for }\lambda = 0    
-\end{cases}
-$$
+Test:
+
+```{r}
+to_box_cox(vals, 0) |> 
+  hist()
+```
+
+## 3. A solution
+
+```{r}
+to_box_cox <- function(x, lambda = 1) {
+  if (lambda == 0) {
+    log(x)
+  }
+  else {
+    (x^lambda - 1) / lambda
+  }
+}
+```
+
+Test:
+
+```{r}
+to_box_cox(vals, 0) |> 
+  hist()
+```
 
 ## Types of function
 
