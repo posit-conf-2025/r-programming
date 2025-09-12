@@ -86,8 +86,6 @@ especially, reduce the amount of duplication in their code.
 
 To each other! With help from Yorkshire!
 
-. . .Posit Conf 2025
-
 <!-- last-minute-tag -->
 
 <!-- last-minute-2025 -->
@@ -109,22 +107,21 @@ Butterfat (from Milk), Fat-reduced cocoa powder, Salt, Lactic acid.
 
 :::: {.column width="32%"}
 ::: {style="font-size: 40%;"}
-![](images/after-eight-thin-mint-squares-25-piece-box.jpg){width="300"}
+![](images/ponte.png){width="300"}
 
-*Ingredients*: Sugar, Semi-Sweet Chocolate (Sugar, Chocolate, Cocoa
-Butter, Milkfat, Soy and Sunflower Lecithin, Natural Vanilla Flavor),
-Glucose Syrup, Peppermint Oil, Citric Acid, Invertase.
+*Ingredients*: Treacle, glucose syrup, maize starch, invert sugar syrup,
+wheat flour (wheat flour, calcium carbonate, iron, niacin, thiamin),
+liquorice extract, modified potato starch, vegetable oils (palm,
+sunflower, coconut), flavouring, glazing agent (carnauba wax).
 :::
 ::::
 
 :::: {.column width="32%"}
 ::: {style="font-size: 40%;"}
-![](images/haribo-strawbs.jpeg){width="300"}
+![](images/yorkshire.png){width="300"}
 
-*Ingredients*: Glucose Syrup, Sugar, Starch, Acid: Citric Acid,
-Flavouring, Fruit and Plant Concentrates: Aronia, Blackcurrant,
-Elderberry, Grape, Lemon, Orange, Safflower Spirulina, Caramelised Sugar
-Syrup, Glazing Agents: Beeswax, Carnauba Wax, Elderberry Extract.
+*Ingredients*: Sugar, glucose syrup, acid: citric acid; flavouring,
+colours: E102, E110, E122, E124, E133, E142.
 :::
 ::::
 :::::::::
@@ -196,7 +193,7 @@ RStudio 2023.03. You will need packages:
 ## Schedule {.smaller}
 
 | Time | Activity |
-|:---|:---|
+|:-----------------------------------|:-----------------------------------|
 | 09:00 - 10:30 | [Functions 1](01-functions-01.html) Introduction, vector and dataframe functions, embracing |
 | 10:30 - 11:00 | ☕ *Coffee break* |
 | 11:00 - 12:30 | [Functions 2](02-functions-02.html) Plot functions, style and side effects |
