@@ -1904,7 +1904,6 @@ In JavaScript, data frames are often arrays of objects (lists); you can use tool
 ## Wrap-up
 
 <!-- last-minute-tag -->
-<!-- last-minute-2025 -->
 
 Please go to [pos.it/conf-workshop-survey](https://pos.it/conf-workshop-survey).
 
@@ -1917,7 +1916,6 @@ Data from the survey informs curriculum and format decisions for future conf wor
 ### Thank you!
 
 <!-- last-minute-tag -->
-<!-- last-minute-2025 -->
 
 ::: incremental
 -   Emma
