@@ -105,21 +105,21 @@ Butterfat (from Milk), Fat-reduced cocoa powder, Salt, Lactic acid.
 
 :::: {.column width="32%"}
 ::: {style="font-size: 40%;"}
-![](images/ponte.png){width="300"}
+![](images/yorkshire.png){width="300"}
 
-*Ingredients*: Treacle, glucose syrup, maize starch, invert sugar syrup,
-wheat flour (wheat flour, calcium carbonate, iron, niacin, thiamin),
-liquorice extract, modified potato starch, vegetable oils (palm,
-sunflower, coconut), flavouring, glazing agent (carnauba wax).
+*Ingredients*: Sugar, glucose syrup, acid: citric acid; flavouring,
+colours: E102, E110, E122, E124, E133, E142.
 :::
 ::::
 
 :::: {.column width="32%"}
 ::: {style="font-size: 40%;"}
-![](images/yorkshire.png){width="300"}
+![](images/ponte.png){width="250"}
 
-*Ingredients*: Sugar, glucose syrup, acid: citric acid; flavouring,
-colours: E102, E110, E122, E124, E133, E142.
+*Ingredients*: Treacle, glucose syrup, maize starch, invert sugar syrup,
+wheat flour (wheat flour, calcium carbonate, iron, niacin, thiamin),
+liquorice extract, modified potato starch, vegetable oils (palm,
+sunflower, coconut), flavouring, glazing agent (carnauba wax).
 :::
 ::::
 :::::::::
@@ -191,7 +191,7 @@ RStudio 2023.03. You will need packages:
 ## Schedule {.smaller}
 
 | Time | Activity |
-|:-----------------------------------|:-----------------------------------|
+|:---|:---|
 | 09:00 - 10:30 | [Functions 1](01-functions-01.html) Introduction, vector and dataframe functions, embracing |
 | 10:30 - 11:00 | ☕ *Coffee break* |
 | 11:00 - 12:30 | [Functions 2](02-functions-02.html) Plot functions, style and side effects |
