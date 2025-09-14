@@ -17,7 +17,8 @@ bibliography: references.bib
 
 ## Overview
 
-In this session we will cover another way to reduce code duplication: iteration.
+In this session we will cover another way to reduce code duplication:
+iteration.
 
 ## Learning Objectives
 
@@ -38,9 +39,11 @@ At the end of this section you will be able to:
 
 ## What is iteration?
 
--   Iteration means repeating steps multiple times until a condition is met
+-   Iteration means repeating steps multiple times until a condition is
+    met
 
--   In other languages, iteration is performed with loops: `for`, `while`
+-   In other languages, iteration is performed with loops: `for`,
+    `while`
 
 . . .
 
@@ -125,14 +128,19 @@ library(tidyverse)
 library(palmerpenguins)
 ```
 
-## Load `penguins`
+## Using and loading `penguins`
+
+🎬 Ensure we use **`palmerpenguins`** package over inbuilt:
+
+```{r}
+conflicted::conflicts_prefer(palmerpenguins::penguins)
+```
 
 🎬 Load `penguins` data set
 
 ```{r}
 data(penguins)
 glimpse(penguins)
-
 ```
 
 # Modifying multiple columns
@@ -180,7 +188,8 @@ penguins |>
 
 ## `across()` Arguments
 
--   which columns you want to iterate over: `.cols = bill_length_mm:body_mass_g`
+-   which columns you want to iterate over:
+    `.cols = bill_length_mm:body_mass_g`
 
 . . .
 
@@ -194,13 +203,15 @@ penguins |>
 
 ## selecting columns with `.cols`
 
--   we could use colon notation, `bill_length_mm:body_mass_g`, because columns are adjacent
+-   we could use colon notation, `bill_length_mm:body_mass_g`, because
+    columns are adjacent
 
 . . .
 
 but
 
--   `.cols` uses same specification as `select()`: `starts_with()`, `ends_with()`, `contains()`, `matches()`
+-   `.cols` uses same specification as `select()`: `starts_with()`,
+    `ends_with()`, `contains()`, `matches()`
 
 ## selecting columns with `.cols`
 
@@ -230,7 +241,8 @@ penguins |>
 
 -   variables in `group_by()` are excluded
 
--   all of `bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, `body_mass_g`, `year`
+-   all of `bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`,
+    `body_mass_g`, `year`
 
 ## selecting columns with `.cols`
 
@@ -259,7 +271,8 @@ penguins |>
 
 ## `.funs`: calling one function
 
--   we can pass a function, `sd_error` to `across()` since R is a functional programming language
+-   we can pass a function, `sd_error` to `across()` since R is a
+    functional programming language
 
 -   note, we are not calling `sd_error()`
 
@@ -291,7 +304,8 @@ penguins |>
 
 We get the NA because we have missing values[^1].
 
-[^1]: There is no problem when we use `sd_error()` because we accounted for NA in our function definition
+[^1]: There is no problem when we use `sd_error()` because we accounted
+    for NA in our function definition
 
 ## Include arguments
 
@@ -311,7 +325,8 @@ penguins |>
 
 ## Include arguments
 
-The solution is to create a new function that calls `mean()` with `na.rm = TRUE`
+The solution is to create a new function that calls `mean()` with
+`na.rm = TRUE`
 
 . . .
 
@@ -475,7 +490,8 @@ penguins |>
 
 ## `.names` to control output
 
-It makes sense to use `across()` to apply the transformation to all three variables
+It makes sense to use `across()` to apply the transformation to all
+three variables
 
 ```{r}
 penguins |>
@@ -512,7 +528,8 @@ penguins |>
 
 Time to bring together functions and iteration!
 
-🎬 Write a function that summarises multiple specified columns of a data frame
+🎬 Write a function that summarises multiple specified columns of a data
+frame
 
 ``` r
 my_summary <- function(df, cols) {

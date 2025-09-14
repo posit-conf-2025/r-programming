@@ -28,8 +28,6 @@ especially, reduce the amount of duplication in their code.
     Science (2nd Edition)](https://r4ds.hadley.nz/) by by Hadley
     Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 
-\
-
 ## Material
 
 -   <https://pos.it/r-programming-conf25>
@@ -102,21 +100,21 @@ Butterfat (from Milk), Fat-reduced cocoa powder, Salt, Lactic acid.
 
 :::: {.column width="32%"}
 ::: {style="font-size: 40%;"}
-![](images/ponte.png){width="300"}
+![](images/yorkshire.png){width="300"}
 
-*Ingredients*: Treacle, glucose syrup, maize starch, invert sugar syrup,
-wheat flour (wheat flour, calcium carbonate, iron, niacin, thiamin),
-liquorice extract, modified potato starch, vegetable oils (palm,
-sunflower, coconut), flavouring, glazing agent (carnauba wax).
+*Ingredients*: Sugar, glucose syrup, acid: citric acid; flavouring,
+colours: E102, E110, E122, E124, E133, E142.
 :::
 ::::
 
 :::: {.column width="32%"}
 ::: {style="font-size: 40%;"}
-![](images/yorkshire.png){width="300"}
+![](images/ponte.png){width="250"}
 
-*Ingredients*: Sugar, glucose syrup, acid: citric acid; flavouring,
-colours: E102, E110, E122, E124, E133, E142.
+*Ingredients*: Treacle, glucose syrup, maize starch, invert sugar syrup,
+wheat flour (wheat flour, calcium carbonate, iron, niacin, thiamin),
+liquorice extract, modified potato starch, vegetable oils (palm,
+sunflower, coconut), flavouring, glazing agent (carnauba wax).
 :::
 ::::
 :::::::::
@@ -185,7 +183,7 @@ RStudio 2023.03. You will need packages:
 ## Schedule {.smaller}
 
 | Time | Activity |
-|:-----------------------------------|:-----------------------------------|
+|:---|:---|
 | 09:00 - 10:30 | [Functions 1](01-functions-01.html) Introduction, vector and dataframe functions, embracing |
 | 10:30 - 11:00 | ☕ *Coffee break* |
 | 11:00 - 12:30 | [Functions 2](02-functions-02.html) Plot functions, style and side effects |
@@ -298,7 +296,13 @@ library(palmerpenguins)
 ℹ Use the conflicted package to force all conflicts to become errors'
 ```
 
-## Load `penguins`
+## Using and loading `penguins`
+
+🎬 Ensure we use **`palmerpenguins`** package over inbuilt:
+
+```{r}
+conflicted::conflicts_prefer(palmerpenguins::penguins)
+```
 
 🎬 Load `penguins` data set
 
@@ -687,10 +691,6 @@ to_box_cox(vals, 0.3) |>
   hist()
 ```
 
-## A solution 2
-
-Check $\lambda \ne 0$
-
 ## 2. A solution
 
 ```{r}
@@ -924,7 +924,7 @@ dplyr](https://dplyr.tidyverse.org/articles/programming.html)
 
 ## Fix `my_summary()` function
 
-The solution is to use embracing: ``` {``{ var }``} ```
+The solution is to use embracing: `{{ var }}`
 
 ```{r}
 my_summary <- function(df, column){
@@ -1068,7 +1068,7 @@ my_summary(penguins, bill_length_mm, c(species, island))
 
 -   Give arguments a default where possible
 
--   We use ``` {``{ var }``} ``` embracing to manage data masking
+-   We use `{{ var }}` embracing to manage data masking
 
 -   We use `pick()` to select more than one variable
 :::
