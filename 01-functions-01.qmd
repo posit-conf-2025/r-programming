@@ -699,10 +699,6 @@ to_box_cox(vals, 0.3) |>
   hist()
 ```
 
-## A solution 2
-
-Check $\lambda \ne 0$
-
 ## 2. A solution
 
 ```{r}
