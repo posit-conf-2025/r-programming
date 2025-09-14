@@ -798,7 +798,7 @@ Re-implement `list_rbind()` using functional-programming techniques:
 ``` r
 data_reimplemented <-
   paths_party |>
-  map(poss_read_excel) |>
+  map(possibly_read_excel) |>
   # keep(negate(is.null)) |>
   # imap(\(df, name) mutate(df, "year" := parse_number(name))) |>
   # reduce(rbind) |>
