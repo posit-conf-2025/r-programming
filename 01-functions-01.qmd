@@ -28,8 +28,6 @@ especially, reduce the amount of duplication in their code.
     Science (2nd Edition)](https://r4ds.hadley.nz/) by by Hadley
     Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 
-\
-
 ## Material
 
 -   <https://pos.it/r-programming-conf25>
@@ -193,7 +191,7 @@ RStudio 2023.03. You will need packages:
 ## Schedule {.smaller}
 
 | Time | Activity |
-|:-----------------------------------|:-----------------------------------|
+|:---|:---|
 | 09:00 - 10:30 | [Functions 1](01-functions-01.html) Introduction, vector and dataframe functions, embracing |
 | 10:30 - 11:00 | ☕ *Coffee break* |
 | 11:00 - 12:30 | [Functions 2](02-functions-02.html) Plot functions, style and side effects |
@@ -306,7 +304,13 @@ library(palmerpenguins)
 ℹ Use the conflicted package to force all conflicts to become errors'
 ```
 
-## Load `penguins`
+## Using and loading `penguins`
+
+🎬 Ensure we use **`palmerpenguins`** package over inbuilt:
+
+```{r}
+conflicts_prefer(palmerpenguins::penguins)
+```
 
 🎬 Load `penguins` data set
 
