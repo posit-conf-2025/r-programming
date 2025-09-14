@@ -309,7 +309,7 @@ library(palmerpenguins)
 🎬 Ensure we use **`palmerpenguins`** package over inbuilt:
 
 ```{r}
-conflicts_prefer(palmerpenguins::penguins)
+conflicted::conflicts_prefer(palmerpenguins::penguins)
 ```
 
 🎬 Load `penguins` data set
