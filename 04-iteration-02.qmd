@@ -756,7 +756,7 @@ Function operators:
 ```{r}
 library("purrr")
 
-poss_read_csv <- possibly(read_csv, otherwise = NULL, quiet = FALSE)
+possibly_read_csv <- possibly(read_csv, otherwise = NULL, quiet = FALSE)
 ```
 
 . . .
@@ -765,7 +765,7 @@ poss_read_csv <- possibly(read_csv, otherwise = NULL, quiet = FALSE)
 
 ```{r}
 #| message: true
-poss_read_csv("not/a/file.csv")
+possibly_read_csv("not/a/file.csv")
 ```
 
 . . .
@@ -773,7 +773,7 @@ poss_read_csv("not/a/file.csv")
 <hr>
 
 ```{r}
-poss_read_csv(I("a, b\n 1, 2"), col_types = "dd")
+possibly_read_csv(I("a, b\n 1, 2"), col_types = "dd")
 ```
 
 ## Our turn: Handle failure

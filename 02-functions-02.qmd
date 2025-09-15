@@ -312,7 +312,7 @@ Our histogram function:
 ```{r}
 histogram <- function(df, var, ..., binwidth = NULL) {
   df |>
-    ggplot(aes(x = {{var}})) +
+    ggplot(aes(x = {{ var }})) +
     geom_histogram(binwidth = binwidth, ...)
 }
 ```
