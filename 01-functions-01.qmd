@@ -196,13 +196,11 @@ RStudio 2023.03. You will need packages:
 
 <!-- last-minute-tag -->
 
-<!-- last-minute-2025 -->
-
 -   stickies
 
-    -   🟦 I'm all good, I'm done
+    -   🟩 I'm all good, I'm done
 
-    -   🟪 I could do with some help
+    -   🎟️ I could do with some help
 
 -   Discord
 
