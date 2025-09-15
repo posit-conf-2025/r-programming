@@ -38,7 +38,6 @@ In case of any installation problems, you will also have access to a Posit Cloud
 ## Discord {#discord}
 
 <!-- last-minute-tag -->
-<!-- last-minute-2025 -->
 
 During the workshop we will have experienced helpers to troubleshoot and will use Discord to enhance workshop interactions:
 
@@ -46,4 +45,4 @@ During the workshop we will have experienced helpers to troubleshoot and will us
 -   Make sure your [display name](https://support.discord.com/hc/en-us/articles/12620128861463-New-Usernames-Display-Names#h_01GXPQABMYGEHGPRJJXJMPHF5C) is the one you used to register for the conference.
 -   In your “About Me”, put the name of your workshop(s).
 
-Closer to the start of the conference, we will invite you to the posit::conf Discord server. Once you’ve accepted the invitation, we will add you to the channel(s) for your conference workshop(s).
+The posit::conf Discord server is open and you can access it via the event portal at [pos.it/conf-event-portal](https://pos.it/conf-event-portal). You can then join the channel for this workshop: `#workshop-r-programming`

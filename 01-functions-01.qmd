@@ -1,7 +1,7 @@
 ---
 title: "useR to programmeR"
 subtitle: "👋 & Functions 1"
-author: "Emma Rand and Ian Lyttle <br>WiFi: <TODO><br>Password: <TODO>"
+author: "Emma Rand and Ian Lyttle <br>WiFi: On your badges"
 format: 
   revealjs:
     theme: [simple, styles.scss]
@@ -35,8 +35,6 @@ especially, reduce the amount of duplication in their code.
 ## The team
 
 <!-- last-minute-tag -->
-
-<!-- last-minute-2025 -->
 
 ::::: columns
 ::: {.column width="55%"}
@@ -75,10 +73,7 @@ especially, reduce the amount of duplication in their code.
 
 <!-- last-minute-tag -->
 
-<!-- last-minute-2025 -->
-
--   Network: <TODO>
--   Password: <TODO>
+On your badges!
 
 ## Introductions
 
@@ -128,7 +123,6 @@ sunflower, coconut), flavouring, glazing agent (carnauba wax).
 
 <!-- last-minute-tag -->
 
-<!-- last-minute-2025 -->
 
 [Code of Conduct](https://posit.co/code-of-conduct/). **Please Review**
 
@@ -140,24 +134,22 @@ Reporting:
 
 -   🗣️ any posit::conf staff member (t-shirt) or Info desk
 -   📧 `codeofconduct@posit.com`
--   ☎️ 844-448-1212
 
 ## Housekeeping
 
 <!-- last-minute-tag -->
 
-<!-- last-minute-2025 -->
+-   Gender-neutral bathrooms:
 
--   There are gender-neutral bathrooms on levels 3, 4, 5, 6 & 7
--   Meditation/prayer rooms: in 503. Open Mon/Tues 0700 - 1900, Wed
-    0700 - 1700
--   Lactation room: in 509 Open Mon/Tues 0700 - 1900, Wed 0700 - 1700
+    - LL1 - Off the back of the Centennial Foyer 
+    - LL2 - Next to Chicago A
+
+-   Meditation/prayer rooms: LL2 - Chicago A
+-   Lactation room: LL2 - Chicago B
 
 ## 🙏 to
 
 <!-- last-minute-tag -->
-
-<!-- last-minute-2025 -->
 
 -   Garrett
 
@@ -204,13 +196,11 @@ RStudio 2023.03. You will need packages:
 
 <!-- last-minute-tag -->
 
-<!-- last-minute-2025 -->
-
 -   stickies
 
-    -   🟦 I'm all good, I'm done
+    -   🟩 I'm all good, I'm done
 
-    -   🟪 I could do with some help
+    -   🎟️ I could do with some help
 
 -   Discord
 
